@@ -39,10 +39,40 @@
   if (reduce || !('IntersectionObserver' in window)) {
     reveals.forEach(function (el) { el.classList.add('is-in'); });
   } else {
+    // Cinematic stagger: cascade items within a grid as the group enters.
+    document.querySelectorAll('.svc-grid, .plan-grid, .steps, #masonry').forEach(function (grid) {
+      var perRow = grid.id === 'masonry';
+      Array.prototype.forEach.call(grid.children, function (child, i) {
+        if (!child.classList.contains('reveal')) return;
+        var d = perRow ? (i % 3) * 90 : Math.min(i, 8) * 80; // gentle, capped
+        child.style.transitionDelay = d + 'ms';
+      });
+    });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
     reveals.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---- Hero mouse parallax (desktop pointers only) ---- */
+  var hero = document.querySelector('.hero');
+  var heroImg = document.querySelector('.hero-media img');
+  if (!reduce && hero && heroImg && window.matchMedia('(pointer:fine)').matches) {
+    var hticking = false, hx = 0, hy = 0;
+    var applyHero = function () {
+      heroImg.style.setProperty('--hpx', (hx * -14).toFixed(1) + 'px');
+      heroImg.style.setProperty('--hpy', (hy * -14).toFixed(1) + 'px');
+      hticking = false;
+    };
+    hero.addEventListener('pointermove', function (e) {
+      var r = hero.getBoundingClientRect();
+      hx = (e.clientX - r.left) / r.width - 0.5;
+      hy = (e.clientY - r.top) / r.height - 0.5;
+      if (!hticking) { requestAnimationFrame(applyHero); hticking = true; }
+    });
+    hero.addEventListener('pointerleave', function () {
+      heroImg.style.setProperty('--hpx', '0px'); heroImg.style.setProperty('--hpy', '0px');
+    });
   }
 
   /* ---- Parallax on full-bleed dividers ---- */

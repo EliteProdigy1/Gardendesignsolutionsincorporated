@@ -471,15 +471,29 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ==========================================================================
-   Reveal animations
+   Reveal animations + cinematic motion
    ========================================================================== */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
 .reveal.is-in { opacity: 1; transform: none; }
+
+/* Hero: subtle mouse parallax (driven by --hpx/--hpy) + gentle overscan. */
+.hero-media img {
+  transform: scale(1.06) translate(var(--hpx, 0px), var(--hpy, 0px));
+  transition: transform .6s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform;
+}
+
+/* Ken-Burns entrance on feature images (no hover-scale on these, so no conflict). */
+.studio-media.reveal img,
+.process-intro.reveal .process-figure img { transform: scale(1.09); transition: transform 1.6s var(--ease); }
+.studio-media.reveal.is-in img,
+.process-intro.reveal.is-in .process-figure img { transform: scale(1); }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .divider-media img { will-change: auto; transform: none !important; }
   .btn, .svc, .tile-btn img, .svc-img img, .plan, .plan-img img { transition: none !important; }
+  .hero-media img { transform: scale(1.06) !important; transition: none !important; }
+  .studio-media img, .process-figure img { transform: none !important; transition: none !important; }
   .lightbox { transition: none; }
   .lb-figure img { transition: none !important; }
   * { scroll-behavior: auto !important; }
