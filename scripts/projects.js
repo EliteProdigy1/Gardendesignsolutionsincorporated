@@ -51,8 +51,9 @@
 const CONCEPT_DISCLOSURE =
   'Conceptual project visualization shown for design storytelling. Historical before and construction photography was not available.';
 
-// helper: base path for a project's media
-const media = (slug, stage, file) => `assets/projects/${slug}/${stage}/${file}`;
+// helper: master path for a project's media (under assets/originals/…); the
+// generator derives responsive AVIF/WebP from these via the media pipeline.
+const media = (slug, stage, file) => `assets/originals/projects/${slug}/${stage}/${file}`;
 
 const SLUG = 'southern-estate-pool-courtyard';
 

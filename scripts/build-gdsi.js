@@ -13,6 +13,44 @@ const hashOf = (rel) => crypto.createHash('md5').update(fs.readFileSync(path.joi
 const CSS_V = hashOf('assets/css/styles.css');
 const JS_V = hashOf('assets/js/main.js');
 
+// Responsive media manifest produced by scripts/media-pipeline.js (AVIF + WebP srcset).
+let MEDIA = {};
+try { MEDIA = JSON.parse(fs.readFileSync(path.join(REPO, 'assets/generated/media-manifest.json'), 'utf8')); }
+catch (e) { console.warn('WARN: media-manifest.json missing — run "npm run media" first. Falling back to originals.'); }
+
+const srcset = (list) => list.map((s) => `${s.src} ${s.w}w`).join(', ');
+const normKey = (s) => String(s).replace(/^assets\/originals\//, ''); // accept full path or bare key
+// Emit a responsive <picture> (AVIF + WebP) from the manifest. Accepts a bare
+// key ("gallery/x.webp") or a full master path ("assets/originals/gallery/x.webp").
+function picture(src, opts) {
+  opts = opts || {};
+  const key = normKey(src);
+  const sizes = opts.sizes || '100vw';
+  const alt = esc(opts.alt || '');
+  const cls = opts.imgClass ? ` class="${opts.imgClass}"` : '';
+  const load = opts.eager ? '' : ' loading="lazy"';
+  const fp = opts.eager ? ' fetchpriority="high"' : '';
+  const style = opts.style ? ` style="${opts.style}"` : '';
+  const m = MEDIA[key];
+  if (!m) {
+    return `<img src="assets/originals/${key}"${cls} alt="${alt}"${load} decoding="async"${fp}${style}>`;
+  }
+  const dims = ` width="${m.width}" height="${m.height}"`;
+  return `<picture>
+            <source type="image/avif" srcset="${srcset(m.avif)}" sizes="${sizes}">
+            <source type="image/webp" srcset="${srcset(m.webp)}" sizes="${sizes}">
+            <img src="${m.fallback}"${dims}${cls} alt="${alt}"${load} decoding="async"${fp}${style}>
+          </picture>`;
+}
+// Full-resolution master path (lightbox zoom target)
+const master = (src) => `assets/originals/${normKey(src)}`;
+// Hero <link rel=preload> with AVIF srcset (LCP)
+function heroPreload(key, sizes) {
+  const m = MEDIA[normKey(key)];
+  if (!m) return `<link rel="preload" as="image" href="assets/originals/${normKey(key)}" fetchpriority="high">`;
+  return `<link rel="preload" as="image" type="image/avif" imagesrcset="${srcset(m.avif)}" imagesizes="${sizes}" fetchpriority="high">`;
+}
+
 // Built Environments categories — completed spaces, grouped by what they are.
 const CATS = [
   { key: 'pools',      label: 'Pools' },
@@ -73,12 +111,12 @@ const TAYS = 'renderings/tays-memorial-garden-plan-mobile-al.webp';
 const { PROJECTS } = require('./projects.js');
 
 function baFigure(c, i, project) {
-  const load = i === 0 ? '' : ' loading="lazy"'; // first comparison eager, rest lazy
   const lbl = esc(project.name + (c.label ? ' — ' + c.label : ''));
+  const sz = '(min-width:900px) 46vw, 92vw';
   return `        <figure class="ba reveal">
           <div class="ba-frame" data-ba style="--pos:50%">
-            <img class="ba-img ba-after" src="${c.after.src}" width="2400" height="1600" alt="${esc(c.after.alt)}"${load} decoding="async">
-            <img class="ba-img ba-before" src="${c.before.src}" width="2400" height="1600" alt="${esc(c.before.alt)}"${load} decoding="async">
+            ${picture(c.after.src, { alt: c.after.alt, imgClass: 'ba-img ba-after', sizes: sz, eager: i === 0 })}
+            ${picture(c.before.src, { alt: c.before.alt, imgClass: 'ba-img ba-before', sizes: sz, eager: i === 0 })}
             <span class="ba-label ba-label--before" aria-hidden="true">Before</span>
             <span class="ba-label ba-label--after" aria-hidden="true">After</span>
             <span class="ba-divider" aria-hidden="true"></span>
@@ -94,8 +132,8 @@ function baFigure(c, i, project) {
 function csSubhead(eyebrow) { return `          <div class="cs-subhead"><span class="cs-eyebrow">${esc(eyebrow)}</span></div>`; }
 
 function csLightboxTile(item, group, caption) {
-  return `            <button class="cs-tile" type="button" data-group="${group}" data-full="${item.src}" data-alt="${esc(item.alt || '')}" data-caption="${esc(caption || '')}" aria-label="View larger: ${esc(item.alt || caption || '')}">
-              <img src="${item.src}" alt="${esc(item.alt || '')}" loading="lazy" decoding="async">
+  return `            <button class="cs-tile" type="button" data-group="${group}" data-full="${master(item.src)}" data-alt="${esc(item.alt || '')}" data-caption="${esc(caption || '')}" aria-label="View larger: ${esc(item.alt || caption || '')}">
+              ${picture(item.src, { alt: item.alt, sizes: '(min-width:900px) 22vw, 45vw' })}
             </button>`;
 }
 
@@ -106,8 +144,8 @@ function planBlock(p, group) {
   return `        <div class="cs-block reveal">
 ${csSubhead('Landscape plan')}
           <div class="cs-plan">
-            <button class="cs-plan-img cs-tile" type="button" data-group="${group}" data-full="${m.src}" data-alt="${esc(m.alt || '')}" data-caption="Landscape plan — ${esc(p.name)}" aria-label="View the landscape plan full-screen">
-              <img src="${m.src}" alt="${esc(m.alt || 'Landscape plan')}" loading="lazy" decoding="async">
+            <button class="cs-plan-img cs-tile" type="button" data-group="${group}" data-full="${master(m.src)}" data-alt="${esc(m.alt || '')}" data-caption="Landscape plan — ${esc(p.name)}" aria-label="View the landscape plan full-screen">
+              ${picture(m.src, { alt: m.alt || 'Landscape plan', sizes: '(min-width:900px) 60vw, 92vw' })}
             </button>
             ${pdf}
           </div>
@@ -125,8 +163,8 @@ ${p.comparisons.map((c, i) => baFigure(c, i, p)).join('\n')}
 
 function timelineBlock(p, group) {
   const steps = p.media.construction.map((it, i) => `            <li class="cs-step">
-              <button class="cs-tile" type="button" data-group="${group}" data-full="${it.src}" data-alt="${esc(it.alt || '')}" data-caption="Construction — ${esc(p.name)}" aria-label="View larger: ${esc(it.alt || 'construction')}">
-                <img src="${it.src}" alt="${esc(it.alt || '')}" loading="lazy" decoding="async">
+              <button class="cs-tile" type="button" data-group="${group}" data-full="${master(it.src)}" data-alt="${esc(it.alt || '')}" data-caption="Construction — ${esc(p.name)}" aria-label="View larger: ${esc(it.alt || 'construction')}">
+                ${picture(it.src, { alt: it.alt, sizes: '(min-width:900px) 31vw, 80vw' })}
               </button>
               <span class="cs-step-n">${String(i + 1).padStart(2, '0')}</span>
             </li>`).join('\n');
@@ -229,9 +267,10 @@ const labelFor = (k) => CATS.find((c) => c.key === k).label;
 
 function figure(it) {
   const [cat, file, w, h, alt] = it;
+  const key = 'gallery/' + file;
   return `        <figure class="tile reveal" data-cat="${cat}" style="aspect-ratio:${w}/${h}">
-          <button class="tile-btn" type="button" data-group="built" data-full="assets/gallery/${file}" data-alt="${esc(alt)}" data-caption="${labelFor(cat)}" aria-label="View larger: ${esc(alt)}">
-            <img src="assets/gallery/${file}" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">
+          <button class="tile-btn" type="button" data-group="built" data-full="${master(key)}" data-alt="${esc(alt)}" data-caption="${labelFor(cat)}" aria-label="View larger: ${esc(alt)}">
+            ${picture(key, { alt, sizes: '(min-width:900px) 31vw, (min-width:560px) 46vw, 92vw' })}
             <span class="tile-meta"><span class="tile-cat">${labelFor(cat)}</span></span>
           </button>
         </figure>`;
@@ -239,8 +278,8 @@ function figure(it) {
 
 function planCard(p) {
   const [file, w, h, title, meta, alt] = p;
-  return `        <button class="plan reveal" type="button" data-group="plans" data-full="assets/${file}" data-alt="${esc(alt)}" data-caption="${esc(title)} — ${esc(meta)}" aria-label="Open plan: ${esc(title)}, ${esc(meta)}">
-          <span class="plan-img"><img src="assets/${file}" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async"></span>
+  return `        <button class="plan reveal" type="button" data-group="plans" data-full="${master(file)}" data-alt="${esc(alt)}" data-caption="${esc(title)} — ${esc(meta)}" aria-label="Open plan: ${esc(title)}, ${esc(meta)}">
+          <span class="plan-img">${picture(file, { alt, sizes: '(min-width:900px) 30vw, 45vw' })}</span>
           <span class="plan-body">
             <span class="plan-title">${esc(title)}</span>
             <span class="plan-meta">${esc(meta)}</span>
@@ -264,7 +303,7 @@ function serviceCard(s, i) {
   const n = String(i + 1).padStart(2, '0');
   const attr = filter ? ` data-jump="${filter}"` : '';
   return `        <a class="svc reveal" href="${jump}"${attr}>
-          <span class="svc-img"><img src="assets/${file}" alt="" loading="lazy" decoding="async"></span>
+          <span class="svc-img">${picture(file, { alt: '', sizes: '(min-width:900px) 30vw, 45vw' })}</span>
           <span class="svc-body">
             <span class="svc-num">${n}</span>
             <span class="svc-title">${title}</span>
@@ -317,13 +356,13 @@ const html = `<!DOCTYPE html>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Garden Design Solutions, Inc.">
   <meta property="og:description" content="Residential landscape design & construction along the Gulf Coast since 2002.">
-  <meta property="og:image" content="https://gdsi.netlify.app/assets/${HERO}">
+  <meta property="og:image" content="https://gdsi.netlify.app/assets/originals/${HERO}">
   <meta property="og:url" content="https://gdsi.netlify.app/">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="assets/${HERO}" fetchpriority="high">
+  ${heroPreload(HERO, "100vw")}
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css?v=${CSS_V}">
 
@@ -378,8 +417,7 @@ const html = `<!DOCTYPE html>
   <!-- HERO -->
   <section class="hero" aria-label="Introduction">
     <div class="hero-media">
-      <img src="assets/${HERO}" width="1448" height="1086"
-           alt="A luxury estate and pool at twilight." fetchpriority="high" decoding="async">
+      ${picture(HERO, { alt: 'A luxury estate and pool at twilight.', eager: true, sizes: '100vw' })}
       <div class="hero-scrim"></div>
     </div>
     <div class="hero-body">
@@ -443,7 +481,7 @@ ${plans}
   <!-- DIVIDER -->
   <section class="divider divider--tall" aria-hidden="true">
     <div class="divider-media" data-parallax>
-      <img src="assets/hero/hero-southern-estate-daylight.webp" width="1453" height="1083" alt="" loading="lazy" decoding="async">
+      ${picture("hero/hero-southern-estate-daylight.webp", { alt: "", sizes: "100vw" })}
     </div>
   </section>
 
@@ -474,7 +512,7 @@ ${caseStudiesSection()}
         <h2 class="display" id="process-title">From first walk to full bloom.</h2>
         <p class="section-lede">Every project follows the same considered path — patient at the start, exacting through construction, and attentive long after planting.</p>
         <figure class="process-figure">
-          <img src="assets/${TAYS}" width="994" height="1496" alt="A hand-rendered landscape design plan drawn from above." loading="lazy" decoding="async">
+          ${picture(TAYS, { alt: "A hand-rendered landscape design plan drawn from above.", sizes: "(min-width:900px) 40vw, 92vw" })}
         </figure>
       </div>
       <ol class="steps">
@@ -486,7 +524,7 @@ ${steps}
   <!-- DIVIDER -->
   <section class="divider" aria-hidden="true">
     <div class="divider-media" data-parallax>
-      <img src="assets/hero/hero-luxury-landscape-pool-sunset.webp" width="1537" height="1023" alt="" loading="lazy" decoding="async">
+      ${picture("hero/hero-luxury-landscape-pool-sunset.webp", { alt: "", sizes: "100vw" })}
     </div>
   </section>
 
@@ -494,7 +532,7 @@ ${steps}
   <section class="studio section" id="studio" aria-labelledby="studio-title">
     <div class="container studio-grid">
       <figure class="studio-media reveal">
-        <img src="assets/gallery/planting-southern-home-live-oaks.webp" width="1455" height="1081" alt="A stately Southern home shaded by mature live oaks." loading="lazy" decoding="async">
+        ${picture("gallery/planting-southern-home-live-oaks.webp", { alt: "A stately Southern home shaded by mature live oaks.", sizes: "(min-width:820px) 48vw, 92vw" })}
       </figure>
       <div class="studio-body reveal">
         <p class="eyebrow">The studio</p>
@@ -612,10 +650,14 @@ fs.writeFileSync(OUT, html);
 // Fresh manifest describing the production asset library.
 const manifest = {
   generated: new Date().toISOString().slice(0, 10),
-  structure: { hero: 'assets/hero', gallery: 'assets/gallery', renderings: 'assets/renderings', projects: 'assets/projects (case studies)' },
+  structure: {
+    masters: 'assets/originals/{hero,gallery,renderings,projects/<slug>/...}',
+    derivatives: 'assets/generated/{avif,webp,thumbnails}/… (see media-manifest.json)',
+    pipeline: 'scripts/media-pipeline.js',
+  },
   hero: ['hero-luxury-estate-pool-twilight.webp', 'hero-luxury-landscape-pool-sunset.webp', 'hero-southern-estate-daylight.webp'],
-  gallery: ITEMS.map(([cat, file, w, h, alt]) => ({ file: 'assets/gallery/' + file, category: cat, width: w, height: h, alt })),
-  renderings: PLANS.map(([file, w, h, title, meta, alt]) => ({ file: 'assets/' + file, project: title, location: meta, width: w, height: h, alt })),
+  gallery: ITEMS.map(([cat, file, w, h, alt]) => ({ master: 'assets/originals/gallery/' + file, category: cat, width: w, height: h, alt })),
+  renderings: PLANS.map(([file, w, h, title, meta, alt]) => ({ master: 'assets/originals/' + file, project: title, location: meta, width: w, height: h, alt })),
 };
 fs.writeFileSync(path.join(REPO, 'assets/manifest.json'), JSON.stringify(manifest, null, 2));
 

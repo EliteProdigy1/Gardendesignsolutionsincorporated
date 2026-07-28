@@ -1,0 +1,12 @@
+{
+  "name": "gdsi-site",
+  "private": true,
+  "description": "Garden Design Solutions, Inc. — static site + media pipeline",
+  "scripts": {
+    "build": "node scripts/build-gdsi.js",
+    "media": "node scripts/media-pipeline.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
+  }
+}

@@ -1,0 +1,1840 @@
+{
+  "gallery/estate-aerial-grounds.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/estate-aerial-grounds-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/estate-aerial-grounds-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/estate-aerial-grounds-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/estate-aerial-grounds-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/estate-aerial-grounds-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/estate-aerial-grounds-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/estate-aerial-grounds-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/estate-aerial-grounds-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/estate-aerial-grounds.webp",
+    "fallback": "assets/generated/webp/gallery/estate-aerial-grounds-1200.webp"
+  },
+  "gallery/estate-architectural-detail.webp": {
+    "width": 1086,
+    "height": 1448,
+    "aspectRatio": 0.75,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/estate-architectural-detail-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/estate-architectural-detail-768.webp"
+      },
+      {
+        "w": 1086,
+        "src": "assets/generated/webp/gallery/estate-architectural-detail-1086.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/estate-architectural-detail-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/estate-architectural-detail-768.avif"
+      },
+      {
+        "w": 1086,
+        "src": "assets/generated/avif/gallery/estate-architectural-detail-1086.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/estate-architectural-detail.webp",
+    "fallback": "assets/generated/webp/gallery/estate-architectural-detail-1086.webp"
+  },
+  "gallery/estate-manicured-lawn.webp": {
+    "width": 1122,
+    "height": 1402,
+    "aspectRatio": 0.8003,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/estate-manicured-lawn-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/estate-manicured-lawn-768.webp"
+      },
+      {
+        "w": 1122,
+        "src": "assets/generated/webp/gallery/estate-manicured-lawn-1122.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/estate-manicured-lawn-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/estate-manicured-lawn-768.avif"
+      },
+      {
+        "w": 1122,
+        "src": "assets/generated/avif/gallery/estate-manicured-lawn-1122.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/estate-manicured-lawn.webp",
+    "fallback": "assets/generated/webp/gallery/estate-manicured-lawn-1122.webp"
+  },
+  "gallery/estate-pool-golden-hour.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/estate-pool-golden-hour-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/estate-pool-golden-hour-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/estate-pool-golden-hour-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/estate-pool-golden-hour-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/estate-pool-golden-hour-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/estate-pool-golden-hour-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/estate-pool-golden-hour-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/estate-pool-golden-hour-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/estate-pool-golden-hour.webp",
+    "fallback": "assets/generated/webp/gallery/estate-pool-golden-hour-1200.webp"
+  },
+  "gallery/estate-white-front-elevation.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/estate-white-front-elevation-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/estate-white-front-elevation-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/estate-white-front-elevation-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/estate-white-front-elevation-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/estate-white-front-elevation-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/estate-white-front-elevation-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/estate-white-front-elevation-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/estate-white-front-elevation-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/estate-white-front-elevation.webp",
+    "fallback": "assets/generated/webp/gallery/estate-white-front-elevation-1200.webp"
+  },
+  "gallery/hardscape-brick-entry-fountain.webp": {
+    "width": 1132,
+    "height": 1390,
+    "aspectRatio": 0.8144,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/hardscape-brick-entry-fountain-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/hardscape-brick-entry-fountain-768.webp"
+      },
+      {
+        "w": 1132,
+        "src": "assets/generated/webp/gallery/hardscape-brick-entry-fountain-1132.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/hardscape-brick-entry-fountain-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/hardscape-brick-entry-fountain-768.avif"
+      },
+      {
+        "w": 1132,
+        "src": "assets/generated/avif/gallery/hardscape-brick-entry-fountain-1132.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/hardscape-brick-entry-fountain.webp",
+    "fallback": "assets/generated/webp/gallery/hardscape-brick-entry-fountain-1132.webp"
+  },
+  "gallery/hardscape-brick-garden-gateway.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/hardscape-brick-garden-gateway-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/hardscape-brick-garden-gateway-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/hardscape-brick-garden-gateway-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/hardscape-brick-garden-gateway-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/hardscape-brick-garden-gateway-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/hardscape-brick-garden-gateway-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/hardscape-brick-garden-gateway-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/hardscape-brick-garden-gateway-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/hardscape-brick-garden-gateway.webp",
+    "fallback": "assets/generated/webp/gallery/hardscape-brick-garden-gateway-1200.webp"
+  },
+  "gallery/hardscape-modern-courtyard-paving.webp": {
+    "width": 1270,
+    "height": 1239,
+    "aspectRatio": 1.025,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/hardscape-modern-courtyard-paving-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/hardscape-modern-courtyard-paving-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/hardscape-modern-courtyard-paving-1200.webp"
+      },
+      {
+        "w": 1270,
+        "src": "assets/generated/webp/gallery/hardscape-modern-courtyard-paving-1270.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/hardscape-modern-courtyard-paving-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/hardscape-modern-courtyard-paving-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/hardscape-modern-courtyard-paving-1200.avif"
+      },
+      {
+        "w": 1270,
+        "src": "assets/generated/avif/gallery/hardscape-modern-courtyard-paving-1270.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/hardscape-modern-courtyard-paving.webp",
+    "fallback": "assets/generated/webp/gallery/hardscape-modern-courtyard-paving-1200.webp"
+  },
+  "gallery/hardscape-white-brick-courtyard.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/hardscape-white-brick-courtyard-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/hardscape-white-brick-courtyard-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/hardscape-white-brick-courtyard-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/hardscape-white-brick-courtyard-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/hardscape-white-brick-courtyard-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/hardscape-white-brick-courtyard-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/hardscape-white-brick-courtyard-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/hardscape-white-brick-courtyard-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/hardscape-white-brick-courtyard.webp",
+    "fallback": "assets/generated/webp/gallery/hardscape-white-brick-courtyard-1200.webp"
+  },
+  "gallery/lighting-architectural-columns-night.webp": {
+    "width": 1254,
+    "height": 1254,
+    "aspectRatio": 1,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/lighting-architectural-columns-night-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/lighting-architectural-columns-night-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/lighting-architectural-columns-night-1200.webp"
+      },
+      {
+        "w": 1254,
+        "src": "assets/generated/webp/gallery/lighting-architectural-columns-night-1254.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/lighting-architectural-columns-night-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/lighting-architectural-columns-night-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/lighting-architectural-columns-night-1200.avif"
+      },
+      {
+        "w": 1254,
+        "src": "assets/generated/avif/gallery/lighting-architectural-columns-night-1254.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/lighting-architectural-columns-night.webp",
+    "fallback": "assets/generated/webp/gallery/lighting-architectural-columns-night-1200.webp"
+  },
+  "gallery/lighting-courtyard-uplighting-dusk.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/lighting-courtyard-uplighting-dusk-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/lighting-courtyard-uplighting-dusk-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/lighting-courtyard-uplighting-dusk-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/lighting-courtyard-uplighting-dusk-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/lighting-courtyard-uplighting-dusk-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/lighting-courtyard-uplighting-dusk-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/lighting-courtyard-uplighting-dusk-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/lighting-courtyard-uplighting-dusk-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/lighting-courtyard-uplighting-dusk.webp",
+    "fallback": "assets/generated/webp/gallery/lighting-courtyard-uplighting-dusk-1200.webp"
+  },
+  "gallery/lighting-infinity-pool-night.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/lighting-infinity-pool-night-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/lighting-infinity-pool-night-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/lighting-infinity-pool-night-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/lighting-infinity-pool-night-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/lighting-infinity-pool-night-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/lighting-infinity-pool-night-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/lighting-infinity-pool-night-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/lighting-infinity-pool-night-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/lighting-infinity-pool-night.webp",
+    "fallback": "assets/generated/webp/gallery/lighting-infinity-pool-night-1200.webp"
+  },
+  "gallery/lighting-pool-edge-night.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/lighting-pool-edge-night-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/lighting-pool-edge-night-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/lighting-pool-edge-night-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/lighting-pool-edge-night-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/lighting-pool-edge-night-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/lighting-pool-edge-night-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/lighting-pool-edge-night-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/lighting-pool-edge-night-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/lighting-pool-edge-night.webp",
+    "fallback": "assets/generated/webp/gallery/lighting-pool-edge-night-1200.webp"
+  },
+  "gallery/lighting-stone-facade-night.webp": {
+    "width": 1229,
+    "height": 1280,
+    "aspectRatio": 0.9602,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/lighting-stone-facade-night-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/lighting-stone-facade-night-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/lighting-stone-facade-night-1200.webp"
+      },
+      {
+        "w": 1229,
+        "src": "assets/generated/webp/gallery/lighting-stone-facade-night-1229.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/lighting-stone-facade-night-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/lighting-stone-facade-night-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/lighting-stone-facade-night-1200.avif"
+      },
+      {
+        "w": 1229,
+        "src": "assets/generated/avif/gallery/lighting-stone-facade-night-1229.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/lighting-stone-facade-night.webp",
+    "fallback": "assets/generated/webp/gallery/lighting-stone-facade-night-1200.webp"
+  },
+  "gallery/planting-coastal-hydrangea-garden-path.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/planting-coastal-hydrangea-garden-path-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/planting-coastal-hydrangea-garden-path-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/planting-coastal-hydrangea-garden-path-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/planting-coastal-hydrangea-garden-path-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/planting-coastal-hydrangea-garden-path-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/planting-coastal-hydrangea-garden-path-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/planting-coastal-hydrangea-garden-path-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/planting-coastal-hydrangea-garden-path-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/planting-coastal-hydrangea-garden-path.webp",
+    "fallback": "assets/generated/webp/gallery/planting-coastal-hydrangea-garden-path-1200.webp"
+  },
+  "gallery/planting-courtyard-japanese-maple.webp": {
+    "width": 1405,
+    "height": 1120,
+    "aspectRatio": 1.2545,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/planting-courtyard-japanese-maple-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/planting-courtyard-japanese-maple-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/planting-courtyard-japanese-maple-1200.webp"
+      },
+      {
+        "w": 1405,
+        "src": "assets/generated/webp/gallery/planting-courtyard-japanese-maple-1405.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/planting-courtyard-japanese-maple-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/planting-courtyard-japanese-maple-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/planting-courtyard-japanese-maple-1200.avif"
+      },
+      {
+        "w": 1405,
+        "src": "assets/generated/avif/gallery/planting-courtyard-japanese-maple-1405.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/planting-courtyard-japanese-maple.webp",
+    "fallback": "assets/generated/webp/gallery/planting-courtyard-japanese-maple-1200.webp"
+  },
+  "gallery/planting-formal-estate-drive.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/planting-formal-estate-drive-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/planting-formal-estate-drive-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/planting-formal-estate-drive-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/planting-formal-estate-drive-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/planting-formal-estate-drive-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/planting-formal-estate-drive-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/planting-formal-estate-drive-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/planting-formal-estate-drive-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/planting-formal-estate-drive.webp",
+    "fallback": "assets/generated/webp/gallery/planting-formal-estate-drive-1200.webp"
+  },
+  "gallery/planting-formal-front-garden.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/planting-formal-front-garden-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/planting-formal-front-garden-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/planting-formal-front-garden-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/planting-formal-front-garden-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/planting-formal-front-garden-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/planting-formal-front-garden-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/planting-formal-front-garden-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/planting-formal-front-garden-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/planting-formal-front-garden.webp",
+    "fallback": "assets/generated/webp/gallery/planting-formal-front-garden-1200.webp"
+  },
+  "gallery/planting-privacy-hedge-walkway.webp": {
+    "width": 1241,
+    "height": 1268,
+    "aspectRatio": 0.9787,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/planting-privacy-hedge-walkway-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/planting-privacy-hedge-walkway-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/planting-privacy-hedge-walkway-1200.webp"
+      },
+      {
+        "w": 1241,
+        "src": "assets/generated/webp/gallery/planting-privacy-hedge-walkway-1241.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/planting-privacy-hedge-walkway-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/planting-privacy-hedge-walkway-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/planting-privacy-hedge-walkway-1200.avif"
+      },
+      {
+        "w": 1241,
+        "src": "assets/generated/avif/gallery/planting-privacy-hedge-walkway-1241.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/planting-privacy-hedge-walkway.webp",
+    "fallback": "assets/generated/webp/gallery/planting-privacy-hedge-walkway-1200.webp"
+  },
+  "gallery/planting-southern-home-live-oaks.webp": {
+    "width": 1455,
+    "height": 1081,
+    "aspectRatio": 1.346,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/planting-southern-home-live-oaks-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/planting-southern-home-live-oaks-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/planting-southern-home-live-oaks-1200.webp"
+      },
+      {
+        "w": 1455,
+        "src": "assets/generated/webp/gallery/planting-southern-home-live-oaks-1455.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/planting-southern-home-live-oaks-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/planting-southern-home-live-oaks-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/planting-southern-home-live-oaks-1200.avif"
+      },
+      {
+        "w": 1455,
+        "src": "assets/generated/avif/gallery/planting-southern-home-live-oaks-1455.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/planting-southern-home-live-oaks.webp",
+    "fallback": "assets/generated/webp/gallery/planting-southern-home-live-oaks-1200.webp"
+  },
+  "gallery/water-backyard-family-pool.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/water-backyard-family-pool-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/water-backyard-family-pool-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/water-backyard-family-pool-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/water-backyard-family-pool-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/water-backyard-family-pool-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/water-backyard-family-pool-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/water-backyard-family-pool-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/water-backyard-family-pool-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/water-backyard-family-pool.webp",
+    "fallback": "assets/generated/webp/gallery/water-backyard-family-pool-1200.webp"
+  },
+  "gallery/water-covered-spa-twilight.webp": {
+    "width": 1537,
+    "height": 1023,
+    "aspectRatio": 1.5024,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/water-covered-spa-twilight-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/water-covered-spa-twilight-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/water-covered-spa-twilight-1200.webp"
+      },
+      {
+        "w": 1537,
+        "src": "assets/generated/webp/gallery/water-covered-spa-twilight-1537.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/water-covered-spa-twilight-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/water-covered-spa-twilight-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/water-covered-spa-twilight-1200.avif"
+      },
+      {
+        "w": 1537,
+        "src": "assets/generated/avif/gallery/water-covered-spa-twilight-1537.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/water-covered-spa-twilight.webp",
+    "fallback": "assets/generated/webp/gallery/water-covered-spa-twilight-1200.webp"
+  },
+  "gallery/water-estate-swimming-pool.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/water-estate-swimming-pool-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/water-estate-swimming-pool-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/water-estate-swimming-pool-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/water-estate-swimming-pool-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/water-estate-swimming-pool-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/water-estate-swimming-pool-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/water-estate-swimming-pool-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/water-estate-swimming-pool-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/water-estate-swimming-pool.webp",
+    "fallback": "assets/generated/webp/gallery/water-estate-swimming-pool-1200.webp"
+  },
+  "gallery/water-formal-garden-fountain.webp": {
+    "width": 1254,
+    "height": 1254,
+    "aspectRatio": 1,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/water-formal-garden-fountain-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/water-formal-garden-fountain-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/water-formal-garden-fountain-1200.webp"
+      },
+      {
+        "w": 1254,
+        "src": "assets/generated/webp/gallery/water-formal-garden-fountain-1254.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/water-formal-garden-fountain-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/water-formal-garden-fountain-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/water-formal-garden-fountain-1200.avif"
+      },
+      {
+        "w": 1254,
+        "src": "assets/generated/avif/gallery/water-formal-garden-fountain-1254.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/water-formal-garden-fountain.webp",
+    "fallback": "assets/generated/webp/gallery/water-formal-garden-fountain-1200.webp"
+  },
+  "gallery/water-luxury-pool-courtyard.webp": {
+    "width": 1451,
+    "height": 1084,
+    "aspectRatio": 1.3386,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/water-luxury-pool-courtyard-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/water-luxury-pool-courtyard-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/water-luxury-pool-courtyard-1200.webp"
+      },
+      {
+        "w": 1451,
+        "src": "assets/generated/webp/gallery/water-luxury-pool-courtyard-1451.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/water-luxury-pool-courtyard-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/water-luxury-pool-courtyard-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/water-luxury-pool-courtyard-1200.avif"
+      },
+      {
+        "w": 1451,
+        "src": "assets/generated/avif/gallery/water-luxury-pool-courtyard-1451.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/water-luxury-pool-courtyard.webp",
+    "fallback": "assets/generated/webp/gallery/water-luxury-pool-courtyard-1200.webp"
+  },
+  "gallery/water-pool-spa-stone-waterwall.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/water-pool-spa-stone-waterwall-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/water-pool-spa-stone-waterwall-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/water-pool-spa-stone-waterwall-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/gallery/water-pool-spa-stone-waterwall-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/water-pool-spa-stone-waterwall-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/water-pool-spa-stone-waterwall-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/water-pool-spa-stone-waterwall-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/gallery/water-pool-spa-stone-waterwall-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/water-pool-spa-stone-waterwall.webp",
+    "fallback": "assets/generated/webp/gallery/water-pool-spa-stone-waterwall-1200.webp"
+  },
+  "gallery/water-sculpture-reflecting-pool.webp": {
+    "width": 1254,
+    "height": 1254,
+    "aspectRatio": 1,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/gallery/water-sculpture-reflecting-pool-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/gallery/water-sculpture-reflecting-pool-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/gallery/water-sculpture-reflecting-pool-1200.webp"
+      },
+      {
+        "w": 1254,
+        "src": "assets/generated/webp/gallery/water-sculpture-reflecting-pool-1254.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/gallery/water-sculpture-reflecting-pool-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/gallery/water-sculpture-reflecting-pool-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/gallery/water-sculpture-reflecting-pool-1200.avif"
+      },
+      {
+        "w": 1254,
+        "src": "assets/generated/avif/gallery/water-sculpture-reflecting-pool-1254.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/gallery/water-sculpture-reflecting-pool.webp",
+    "fallback": "assets/generated/webp/gallery/water-sculpture-reflecting-pool-1200.webp"
+  },
+  "hero/hero-luxury-estate-pool-twilight.webp": {
+    "width": 1448,
+    "height": 1086,
+    "aspectRatio": 1.3333,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/hero/hero-luxury-estate-pool-twilight-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/hero/hero-luxury-estate-pool-twilight-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/hero/hero-luxury-estate-pool-twilight-1200.webp"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/webp/hero/hero-luxury-estate-pool-twilight-1448.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/hero/hero-luxury-estate-pool-twilight-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/hero/hero-luxury-estate-pool-twilight-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/hero/hero-luxury-estate-pool-twilight-1200.avif"
+      },
+      {
+        "w": 1448,
+        "src": "assets/generated/avif/hero/hero-luxury-estate-pool-twilight-1448.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/hero/hero-luxury-estate-pool-twilight.webp",
+    "fallback": "assets/generated/webp/hero/hero-luxury-estate-pool-twilight-1200.webp"
+  },
+  "hero/hero-luxury-landscape-pool-sunset.webp": {
+    "width": 1537,
+    "height": 1023,
+    "aspectRatio": 1.5024,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/hero/hero-luxury-landscape-pool-sunset-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/hero/hero-luxury-landscape-pool-sunset-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/hero/hero-luxury-landscape-pool-sunset-1200.webp"
+      },
+      {
+        "w": 1537,
+        "src": "assets/generated/webp/hero/hero-luxury-landscape-pool-sunset-1537.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/hero/hero-luxury-landscape-pool-sunset-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/hero/hero-luxury-landscape-pool-sunset-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/hero/hero-luxury-landscape-pool-sunset-1200.avif"
+      },
+      {
+        "w": 1537,
+        "src": "assets/generated/avif/hero/hero-luxury-landscape-pool-sunset-1537.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/hero/hero-luxury-landscape-pool-sunset.webp",
+    "fallback": "assets/generated/webp/hero/hero-luxury-landscape-pool-sunset-1200.webp"
+  },
+  "hero/hero-southern-estate-daylight.webp": {
+    "width": 1453,
+    "height": 1083,
+    "aspectRatio": 1.3416,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/hero/hero-southern-estate-daylight-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/hero/hero-southern-estate-daylight-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/hero/hero-southern-estate-daylight-1200.webp"
+      },
+      {
+        "w": 1453,
+        "src": "assets/generated/webp/hero/hero-southern-estate-daylight-1453.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/hero/hero-southern-estate-daylight-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/hero/hero-southern-estate-daylight-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/hero/hero-southern-estate-daylight-1200.avif"
+      },
+      {
+        "w": 1453,
+        "src": "assets/generated/avif/hero/hero-southern-estate-daylight-1453.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/hero/hero-southern-estate-daylight.webp",
+    "fallback": "assets/generated/webp/hero/hero-southern-estate-daylight-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/after/courtyard-spa.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/courtyard-spa-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/courtyard-spa-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/courtyard-spa-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/courtyard-spa-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/courtyard-spa-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/courtyard-spa-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/courtyard-spa-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/courtyard-spa-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/courtyard-spa-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/courtyard-spa-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/after/courtyard-spa.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/courtyard-spa-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/after/estate-pool.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/estate-pool-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/estate-pool-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/estate-pool-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/estate-pool-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/estate-pool-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/estate-pool-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/estate-pool-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/estate-pool-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/estate-pool-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/estate-pool-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/after/estate-pool.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/estate-pool-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/after/pool-terrace.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/pool-terrace-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/pool-terrace-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/pool-terrace-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/pool-terrace-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/pool-terrace-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/pool-terrace-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/pool-terrace-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/pool-terrace-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/pool-terrace-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/after/pool-terrace-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/after/pool-terrace.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/after/pool-terrace-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/before/courtyard-spa.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/courtyard-spa-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/courtyard-spa-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/courtyard-spa-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/courtyard-spa-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/courtyard-spa-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/courtyard-spa-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/courtyard-spa-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/courtyard-spa-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/courtyard-spa-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/courtyard-spa-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/before/courtyard-spa.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/courtyard-spa-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/before/estate-pool.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/estate-pool-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/estate-pool-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/estate-pool-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/estate-pool-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/estate-pool-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/estate-pool-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/estate-pool-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/estate-pool-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/estate-pool-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/estate-pool-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/before/estate-pool.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/estate-pool-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/before/pool-terrace.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/pool-terrace-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/pool-terrace-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/pool-terrace-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/pool-terrace-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/pool-terrace-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/pool-terrace-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/pool-terrace-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/pool-terrace-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/pool-terrace-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/before/pool-terrace-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/before/pool-terrace.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/before/pool-terrace-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/during/courtyard-spa.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/courtyard-spa-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/courtyard-spa-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/courtyard-spa-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/courtyard-spa-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/courtyard-spa-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/courtyard-spa-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/courtyard-spa-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/courtyard-spa-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/courtyard-spa-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/courtyard-spa-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/during/courtyard-spa.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/courtyard-spa-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/during/estate-pool.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/estate-pool-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/estate-pool-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/estate-pool-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/estate-pool-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/estate-pool-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/estate-pool-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/estate-pool-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/estate-pool-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/estate-pool-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/estate-pool-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/during/estate-pool.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/estate-pool-1200.webp"
+  },
+  "projects/southern-estate-pool-courtyard/during/pool-terrace.webp": {
+    "width": 2400,
+    "height": 1600,
+    "aspectRatio": 1.5,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/pool-terrace-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/pool-terrace-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/pool-terrace-1200.webp"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/pool-terrace-1800.webp"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/pool-terrace-2400.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/pool-terrace-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/pool-terrace-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/pool-terrace-1200.avif"
+      },
+      {
+        "w": 1800,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/pool-terrace-1800.avif"
+      },
+      {
+        "w": 2400,
+        "src": "assets/generated/avif/projects/southern-estate-pool-courtyard/during/pool-terrace-2400.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/projects/southern-estate-pool-courtyard/during/pool-terrace.webp",
+    "fallback": "assets/generated/webp/projects/southern-estate-pool-courtyard/during/pool-terrace-1200.webp"
+  },
+  "renderings/connolly-residence-plan-gulf-breeze-fl.webp": {
+    "width": 1490,
+    "height": 991,
+    "aspectRatio": 1.5035,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/renderings/connolly-residence-plan-gulf-breeze-fl-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/renderings/connolly-residence-plan-gulf-breeze-fl-768.webp"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/webp/renderings/connolly-residence-plan-gulf-breeze-fl-1200.webp"
+      },
+      {
+        "w": 1490,
+        "src": "assets/generated/webp/renderings/connolly-residence-plan-gulf-breeze-fl-1490.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/renderings/connolly-residence-plan-gulf-breeze-fl-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/renderings/connolly-residence-plan-gulf-breeze-fl-768.avif"
+      },
+      {
+        "w": 1200,
+        "src": "assets/generated/avif/renderings/connolly-residence-plan-gulf-breeze-fl-1200.avif"
+      },
+      {
+        "w": 1490,
+        "src": "assets/generated/avif/renderings/connolly-residence-plan-gulf-breeze-fl-1490.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/renderings/connolly-residence-plan-gulf-breeze-fl.webp",
+    "fallback": "assets/generated/webp/renderings/connolly-residence-plan-gulf-breeze-fl-1200.webp"
+  },
+  "renderings/roberts-residence-plan-fairhope-al.webp": {
+    "width": 994,
+    "height": 1994,
+    "aspectRatio": 0.4985,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/renderings/roberts-residence-plan-fairhope-al-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/renderings/roberts-residence-plan-fairhope-al-768.webp"
+      },
+      {
+        "w": 994,
+        "src": "assets/generated/webp/renderings/roberts-residence-plan-fairhope-al-994.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/renderings/roberts-residence-plan-fairhope-al-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/renderings/roberts-residence-plan-fairhope-al-768.avif"
+      },
+      {
+        "w": 994,
+        "src": "assets/generated/avif/renderings/roberts-residence-plan-fairhope-al-994.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/renderings/roberts-residence-plan-fairhope-al.webp",
+    "fallback": "assets/generated/webp/renderings/roberts-residence-plan-fairhope-al-994.webp"
+  },
+  "renderings/tays-memorial-garden-plan-mobile-al.webp": {
+    "width": 994,
+    "height": 1496,
+    "aspectRatio": 0.6644,
+    "webp": [
+      {
+        "w": 480,
+        "src": "assets/generated/webp/renderings/tays-memorial-garden-plan-mobile-al-480.webp"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/webp/renderings/tays-memorial-garden-plan-mobile-al-768.webp"
+      },
+      {
+        "w": 994,
+        "src": "assets/generated/webp/renderings/tays-memorial-garden-plan-mobile-al-994.webp"
+      }
+    ],
+    "avif": [
+      {
+        "w": 480,
+        "src": "assets/generated/avif/renderings/tays-memorial-garden-plan-mobile-al-480.avif"
+      },
+      {
+        "w": 768,
+        "src": "assets/generated/avif/renderings/tays-memorial-garden-plan-mobile-al-768.avif"
+      },
+      {
+        "w": 994,
+        "src": "assets/generated/avif/renderings/tays-memorial-garden-plan-mobile-al-994.avif"
+      }
+    ],
+    "thumb": "assets/generated/thumbnails/renderings/tays-memorial-garden-plan-mobile-al.webp",
+    "fallback": "assets/generated/webp/renderings/tays-memorial-garden-plan-mobile-al-994.webp"
+  }
+}

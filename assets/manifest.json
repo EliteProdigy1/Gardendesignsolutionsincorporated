@@ -1,10 +1,9 @@
 {
   "generated": "2026-07-28",
   "structure": {
-    "hero": "assets/hero",
-    "gallery": "assets/gallery",
-    "renderings": "assets/renderings",
-    "projects": "assets/projects (case studies)"
+    "masters": "assets/originals/{hero,gallery,renderings,projects/<slug>/...}",
+    "derivatives": "assets/generated/{avif,webp,thumbnails}/… (see media-manifest.json)",
+    "pipeline": "scripts/media-pipeline.js"
   },
   "hero": [
     "hero-luxury-estate-pool-twilight.webp",
@@ -13,189 +12,189 @@
   ],
   "gallery": [
     {
-      "file": "assets/gallery/water-luxury-pool-courtyard.webp",
+      "master": "assets/originals/gallery/water-luxury-pool-courtyard.webp",
       "category": "pools",
       "width": 1451,
       "height": 1084,
       "alt": "A luxury pool set within a landscaped courtyard."
     },
     {
-      "file": "assets/gallery/water-pool-spa-stone-waterwall.webp",
+      "master": "assets/originals/gallery/water-pool-spa-stone-waterwall.webp",
       "category": "pools",
       "width": 1448,
       "height": 1086,
       "alt": "A pool and spa with a stone water wall."
     },
     {
-      "file": "assets/gallery/water-estate-swimming-pool.webp",
+      "master": "assets/originals/gallery/water-estate-swimming-pool.webp",
       "category": "pools",
       "width": 1448,
       "height": 1086,
       "alt": "An estate swimming pool on a clear day."
     },
     {
-      "file": "assets/gallery/water-backyard-family-pool.webp",
+      "master": "assets/originals/gallery/water-backyard-family-pool.webp",
       "category": "pools",
       "width": 1448,
       "height": 1086,
       "alt": "A backyard family pool in bright daylight."
     },
     {
-      "file": "assets/gallery/water-covered-spa-twilight.webp",
+      "master": "assets/originals/gallery/water-covered-spa-twilight.webp",
       "category": "pools",
       "width": 1537,
       "height": 1023,
       "alt": "A covered spa beside the pool at twilight."
     },
     {
-      "file": "assets/gallery/estate-pool-golden-hour.webp",
+      "master": "assets/originals/gallery/estate-pool-golden-hour.webp",
       "category": "pools",
       "width": 1448,
       "height": 1086,
       "alt": "An estate and pool bathed in golden-hour light."
     },
     {
-      "file": "assets/gallery/planting-courtyard-japanese-maple.webp",
+      "master": "assets/originals/gallery/planting-courtyard-japanese-maple.webp",
       "category": "courtyards",
       "width": 1405,
       "height": 1120,
       "alt": "A courtyard planting anchored by a Japanese maple."
     },
     {
-      "file": "assets/gallery/water-sculpture-reflecting-pool.webp",
+      "master": "assets/originals/gallery/water-sculpture-reflecting-pool.webp",
       "category": "courtyards",
       "width": 1254,
       "height": 1254,
       "alt": "A sculptural reflecting pool in a modern courtyard."
     },
     {
-      "file": "assets/gallery/hardscape-white-brick-courtyard.webp",
+      "master": "assets/originals/gallery/hardscape-white-brick-courtyard.webp",
       "category": "courtyards",
       "width": 1448,
       "height": 1086,
       "alt": "A bright white-brick courtyard with paved surfaces."
     },
     {
-      "file": "assets/gallery/hardscape-modern-courtyard-paving.webp",
+      "master": "assets/originals/gallery/hardscape-modern-courtyard-paving.webp",
       "category": "courtyards",
       "width": 1270,
       "height": 1239,
       "alt": "A modern courtyard with clean paved hardscape."
     },
     {
-      "file": "assets/gallery/planting-coastal-hydrangea-garden-path.webp",
+      "master": "assets/originals/gallery/planting-coastal-hydrangea-garden-path.webp",
       "category": "gardens",
       "width": 1448,
       "height": 1086,
       "alt": "A coastal garden pathway bordered by blooming hydrangeas."
     },
     {
-      "file": "assets/gallery/planting-formal-front-garden.webp",
+      "master": "assets/originals/gallery/planting-formal-front-garden.webp",
       "category": "gardens",
       "width": 1448,
       "height": 1086,
       "alt": "A symmetrical formal front garden with clipped hedging."
     },
     {
-      "file": "assets/gallery/planting-privacy-hedge-walkway.webp",
+      "master": "assets/originals/gallery/planting-privacy-hedge-walkway.webp",
       "category": "gardens",
       "width": 1241,
       "height": 1268,
       "alt": "A garden walkway screened by a tall privacy hedge."
     },
     {
-      "file": "assets/gallery/planting-southern-home-live-oaks.webp",
+      "master": "assets/originals/gallery/planting-southern-home-live-oaks.webp",
       "category": "gardens",
       "width": 1455,
       "height": 1081,
       "alt": "A stately Southern home shaded by mature live oaks."
     },
     {
-      "file": "assets/gallery/water-formal-garden-fountain.webp",
+      "master": "assets/originals/gallery/water-formal-garden-fountain.webp",
       "category": "gardens",
       "width": 1254,
       "height": 1254,
       "alt": "A symmetrical garden fountain surrounded by planting."
     },
     {
-      "file": "assets/gallery/estate-manicured-lawn.webp",
+      "master": "assets/originals/gallery/estate-manicured-lawn.webp",
       "category": "gardens",
       "width": 1122,
       "height": 1402,
       "alt": "An estate framed by an expansive manicured lawn."
     },
     {
-      "file": "assets/gallery/estate-aerial-grounds.webp",
+      "master": "assets/originals/gallery/estate-aerial-grounds.webp",
       "category": "gardens",
       "width": 1448,
       "height": 1086,
       "alt": "An aerial view of a landscaped estate and grounds."
     },
     {
-      "file": "assets/gallery/lighting-infinity-pool-night.webp",
+      "master": "assets/originals/gallery/lighting-infinity-pool-night.webp",
       "category": "lighting",
       "width": 1448,
       "height": 1086,
       "alt": "An infinity pool illuminated after dark."
     },
     {
-      "file": "assets/gallery/lighting-pool-edge-night.webp",
+      "master": "assets/originals/gallery/lighting-pool-edge-night.webp",
       "category": "lighting",
       "width": 1448,
       "height": 1086,
       "alt": "Warm edge lighting around a pool at night."
     },
     {
-      "file": "assets/gallery/lighting-courtyard-uplighting-dusk.webp",
+      "master": "assets/originals/gallery/lighting-courtyard-uplighting-dusk.webp",
       "category": "lighting",
       "width": 1448,
       "height": 1086,
       "alt": "Courtyard plantings and walls accented with uplighting at dusk."
     },
     {
-      "file": "assets/gallery/lighting-stone-facade-night.webp",
+      "master": "assets/originals/gallery/lighting-stone-facade-night.webp",
       "category": "lighting",
       "width": 1229,
       "height": 1280,
       "alt": "A stone facade washed with exterior lighting at night."
     },
     {
-      "file": "assets/gallery/lighting-architectural-columns-night.webp",
+      "master": "assets/originals/gallery/lighting-architectural-columns-night.webp",
       "category": "lighting",
       "width": 1254,
       "height": 1254,
       "alt": "Architectural columns lit at night."
     },
     {
-      "file": "assets/gallery/planting-formal-estate-drive.webp",
+      "master": "assets/originals/gallery/planting-formal-estate-drive.webp",
       "category": "entrances",
       "width": 1448,
       "height": 1086,
       "alt": "A formal estate drive framed by manicured plantings."
     },
     {
-      "file": "assets/gallery/hardscape-brick-garden-gateway.webp",
+      "master": "assets/originals/gallery/hardscape-brick-garden-gateway.webp",
       "category": "entrances",
       "width": 1448,
       "height": 1086,
       "alt": "A brick garden gateway framing the entrance."
     },
     {
-      "file": "assets/gallery/hardscape-brick-entry-fountain.webp",
+      "master": "assets/originals/gallery/hardscape-brick-entry-fountain.webp",
       "category": "entrances",
       "width": 1132,
       "height": 1390,
       "alt": "A brick entryway with a stone fountain."
     },
     {
-      "file": "assets/gallery/estate-white-front-elevation.webp",
+      "master": "assets/originals/gallery/estate-white-front-elevation.webp",
       "category": "entrances",
       "width": 1448,
       "height": 1086,
       "alt": "The front elevation of a white estate with formal landscaping."
     },
     {
-      "file": "assets/gallery/estate-architectural-detail.webp",
+      "master": "assets/originals/gallery/estate-architectural-detail.webp",
       "category": "entrances",
       "width": 1086,
       "height": 1448,
@@ -204,7 +203,7 @@
   ],
   "renderings": [
     {
-      "file": "assets/renderings/tays-memorial-garden-plan-mobile-al.webp",
+      "master": "assets/originals/renderings/tays-memorial-garden-plan-mobile-al.webp",
       "project": "Tay's Memorial Garden",
       "location": "251 Tuthill Lane · Mobile, Alabama",
       "width": 994,
@@ -212,7 +211,7 @@
       "alt": "Landscape plan for Tay's Memorial Garden, a formal memorial garden in Mobile, Alabama."
     },
     {
-      "file": "assets/renderings/roberts-residence-plan-fairhope-al.webp",
+      "master": "assets/originals/renderings/roberts-residence-plan-fairhope-al.webp",
       "project": "The Roberts Residence",
       "location": "14243 Scenic Hwy 98 · Fairhope, Alabama",
       "width": 994,
@@ -220,7 +219,7 @@
       "alt": "Landscape plan for the Roberts Residence on Mobile Bay in Fairhope, Alabama."
     },
     {
-      "file": "assets/renderings/connolly-residence-plan-gulf-breeze-fl.webp",
+      "master": "assets/originals/renderings/connolly-residence-plan-gulf-breeze-fl.webp",
       "project": "The Connolly Residence",
       "location": "736 Peake's Point Drive · Gulf Breeze, Florida",
       "width": 1490,

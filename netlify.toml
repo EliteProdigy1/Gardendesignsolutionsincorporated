@@ -26,9 +26,14 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Long-cache images.
+# Long-cache images (masters + generated derivatives are size-stamped filenames).
 [[headers]]
-  for = "/assets/images/*"
+  for = "/assets/generated/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/originals/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
 
