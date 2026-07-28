@@ -90,13 +90,106 @@ function baFigure(c, i, project) {
         </figure>`;
 }
 
+/* --- Case-study sub-sections (each renders only when its data exists) --- */
+function csSubhead(eyebrow) { return `          <div class="cs-subhead"><span class="cs-eyebrow">${esc(eyebrow)}</span></div>`; }
+
+function csLightboxTile(item, group, caption) {
+  return `            <button class="cs-tile" type="button" data-group="${group}" data-full="${item.src}" data-alt="${esc(item.alt || '')}" data-caption="${esc(caption || '')}" aria-label="View larger: ${esc(item.alt || caption || '')}">
+              <img src="${item.src}" alt="${esc(item.alt || '')}" loading="lazy" decoding="async">
+            </button>`;
+}
+
+function planBlock(p, group) {
+  const m = p.media.plan;
+  const pdf = p.media.pdf
+    ? `<a class="btn btn--brass btn--sm" href="${p.media.pdf}" download>Download plan (PDF)</a>` : '';
+  return `        <div class="cs-block reveal">
+${csSubhead('Landscape plan')}
+          <div class="cs-plan">
+            <button class="cs-plan-img cs-tile" type="button" data-group="${group}" data-full="${m.src}" data-alt="${esc(m.alt || '')}" data-caption="Landscape plan — ${esc(p.name)}" aria-label="View the landscape plan full-screen">
+              <img src="${m.src}" alt="${esc(m.alt || 'Landscape plan')}" loading="lazy" decoding="async">
+            </button>
+            ${pdf}
+          </div>
+        </div>`;
+}
+
+function comparisonBlock(p) {
+  return `        <div class="cs-block reveal">
+${csSubhead('Before · During · After')}
+          <div class="ba-grid">
+${p.comparisons.map((c, i) => baFigure(c, i, p)).join('\n')}
+          </div>
+        </div>`;
+}
+
+function timelineBlock(p, group) {
+  const steps = p.media.construction.map((it, i) => `            <li class="cs-step">
+              <button class="cs-tile" type="button" data-group="${group}" data-full="${it.src}" data-alt="${esc(it.alt || '')}" data-caption="Construction — ${esc(p.name)}" aria-label="View larger: ${esc(it.alt || 'construction')}">
+                <img src="${it.src}" alt="${esc(it.alt || '')}" loading="lazy" decoding="async">
+              </button>
+              <span class="cs-step-n">${String(i + 1).padStart(2, '0')}</span>
+            </li>`).join('\n');
+  return `        <div class="cs-block reveal">
+${csSubhead('Construction timeline')}
+          <ol class="cs-timeline">
+${steps}
+          </ol>
+        </div>`;
+}
+
+function galleryItems(p) {
+  const m = p.media;
+  return [].concat(
+    (m.completedDay || []).map((x) => ({ item: x, cap: 'Completed' })),
+    (m.twilight || []).map((x) => ({ item: x, cap: 'Twilight' })),
+    (m.drone || []).map((x) => ({ item: x, cap: 'Aerial' })),
+    (m.details || []).map((x) => ({ item: x, cap: 'Detail' })),
+  );
+}
+
+function galleryBlock(p, group, items) {
+  return `        <div class="cs-block reveal">
+${csSubhead('Gallery')}
+          <div class="cs-gallery">
+${items.map((g) => csLightboxTile(g.item, group, g.cap + ' — ' + p.name)).join('\n')}
+          </div>
+        </div>`;
+}
+
+function specsBlock(p) {
+  const rows = [];
+  if (p.plantPalette && p.plantPalette.length) rows.push(['Plant palette', p.plantPalette.join(', ')]);
+  if (p.hardscapeMaterials && p.hardscapeMaterials.length) rows.push(['Hardscape materials', p.hardscapeMaterials.join(', ')]);
+  if (p.lightingSystem) rows.push(['Lighting', p.lightingSystem]);
+  if (p.irrigation) rows.push(['Irrigation', p.irrigation]);
+  if (p.specialFeatures && p.specialFeatures.length) rows.push(['Special features', p.specialFeatures.join(', ')]);
+  if (!rows.length) return '';
+  return `        <div class="cs-block reveal">
+${csSubhead('Project specifications')}
+          <dl class="cs-specs">
+${rows.map(([k, v]) => `            <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
+          </dl>
+        </div>`;
+}
+
 function projectArticle(p) {
+  const group = 'case-' + p.slug;
   const meta = [p.city, p.completionYear].filter(Boolean).join(' · ');
   const services = (p.services && p.services.length)
     ? `<ul class="project-services">${p.services.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : '';
   const story = p.story ? `<p class="project-story">${esc(p.story)}</p>` : '';
   const disc = (p.status === 'concept' && p.disclosure) ? `<p class="ba-disclosure">${esc(p.disclosure)}</p>` : '';
-  const comps = p.comparisons.map((c, i) => baFigure(c, i, p)).join('\n');
+
+  const blocks = [];
+  if (p.media && p.media.plan) blocks.push(planBlock(p, group));
+  if (p.comparisons && p.comparisons.length) blocks.push(comparisonBlock(p));
+  if (p.media && p.media.construction && p.media.construction.length) blocks.push(timelineBlock(p, group));
+  const gal = galleryItems(p);
+  if (gal.length) blocks.push(galleryBlock(p, group, gal));
+  const specs = specsBlock(p);
+  if (specs) blocks.push(specs);
+
   return `      <article class="project reveal">
         <div class="project-head">
           ${p.featured ? '<span class="project-flag">Featured project</span>' : ''}
@@ -105,25 +198,23 @@ function projectArticle(p) {
           ${services}
           ${story}
         </div>
-        <div class="ba-grid">
-${comps}
-        </div>
+${blocks.join('\n')}
         ${disc}
       </article>`;
 }
 
-function beforeAfterSection() {
+function caseStudiesSection() {
   const live = PROJECTS.filter((p) => p.enabled);
   if (!live.length) return ''; // hidden until at least one project is enabled
   live.sort((a, b) => (b.featured === true) - (a.featured === true)); // featured first
   return `
-  <!-- BEFORE / DURING / AFTER — project case studies (hidden until a project is enabled) -->
-  <section class="beforeafter section" id="before-after" aria-labelledby="ba-title">
+  <!-- CASE STUDIES — the GDSI case-study system (hidden until a project is enabled) -->
+  <section class="casestudies section" id="case-studies" aria-labelledby="cs-title">
     <div class="container">
       <div class="section-head reveal">
-        <p class="eyebrow">Before &amp; after</p>
-        <h2 class="display" id="ba-title">The transformation.</h2>
-        <p class="section-lede">Drag, or use the arrow keys, to move between the two states of each space.</p>
+        <p class="eyebrow">Case studies</p>
+        <h2 class="display" id="cs-title">From concept to completion.</h2>
+        <p class="section-lede">How each estate was designed, built, planted and illuminated — the full story, drawn from the plan to the finished ground.</p>
       </div>
       <div class="project-list">
 ${live.map(projectArticle).join('\n')}
@@ -139,8 +230,8 @@ const labelFor = (k) => CATS.find((c) => c.key === k).label;
 function figure(it) {
   const [cat, file, w, h, alt] = it;
   return `        <figure class="tile reveal" data-cat="${cat}" style="aspect-ratio:${w}/${h}">
-          <button class="tile-btn" type="button" data-group="built" data-full="assets/projects/${file}" data-alt="${esc(alt)}" data-caption="${labelFor(cat)}" aria-label="View larger: ${esc(alt)}">
-            <img src="assets/projects/${file}" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">
+          <button class="tile-btn" type="button" data-group="built" data-full="assets/gallery/${file}" data-alt="${esc(alt)}" data-caption="${labelFor(cat)}" aria-label="View larger: ${esc(alt)}">
+            <img src="assets/gallery/${file}" width="${w}" height="${h}" alt="${esc(alt)}" loading="lazy" decoding="async">
             <span class="tile-meta"><span class="tile-cat">${labelFor(cat)}</span></span>
           </button>
         </figure>`;
@@ -160,12 +251,12 @@ function planCard(p) {
 
 // Services (five disciplines + full estate). [jump, filterKey|'', image(under assets/projects), title, copy]
 const SERVICES = [
-  ['#built', 'gardens', 'projects/planting-coastal-hydrangea-garden-path.webp', 'Planting Design', 'Seasonal structure, native and coastal palettes, and living architecture composed to settle into its site.'],
-  ['#built', 'pools', 'projects/water-luxury-pool-courtyard.webp', 'Water Features & Pools', 'Pools, spas, fountains and reflecting water composed as the quiet centre of an outdoor room.'],
-  ['#built', 'lighting', 'projects/lighting-courtyard-uplighting-dusk.webp', 'Lighting', 'Layered exterior lighting that lets a garden change character from dusk into full night.'],
-  ['#built', 'courtyards', 'projects/hardscape-white-brick-courtyard.webp', 'Hardscapes', 'Terraces, courtyards, walls and gateways in brick and stone that give a landscape its bones.'],
+  ['#built', 'gardens', 'gallery/planting-coastal-hydrangea-garden-path.webp', 'Planting Design', 'Seasonal structure, native and coastal palettes, and living architecture composed to settle into its site.'],
+  ['#built', 'pools', 'gallery/water-luxury-pool-courtyard.webp', 'Water Features & Pools', 'Pools, spas, fountains and reflecting water composed as the quiet centre of an outdoor room.'],
+  ['#built', 'lighting', 'gallery/lighting-courtyard-uplighting-dusk.webp', 'Lighting', 'Layered exterior lighting that lets a garden change character from dusk into full night.'],
+  ['#built', 'courtyards', 'gallery/hardscape-white-brick-courtyard.webp', 'Hardscapes', 'Terraces, courtyards, walls and gateways in brick and stone that give a landscape its bones.'],
   ['#architecture', '', 'renderings/tays-memorial-garden-plan-mobile-al.webp', 'Landscape Architecture', 'Measured, hand-rendered plans that let a whole property be understood before a spade is lifted.'],
-  ['#built', '', 'projects/estate-pool-golden-hour.webp', 'Full Estate Landscapes', 'Whole-property design and construction carried from the first drawing to the finished ground.'],
+  ['#built', '', 'gallery/estate-pool-golden-hour.webp', 'Full Estate Landscapes', 'Whole-property design and construction carried from the first drawing to the finished ground.'],
 ];
 
 function serviceCard(s, i) {
@@ -374,7 +465,7 @@ ${tiles}
     </div>
   </section>
 
-${beforeAfterSection()}
+${caseStudiesSection()}
   <!-- PROCESS -->
   <section class="process section" id="process" aria-labelledby="process-title">
     <div class="container process-grid">
@@ -403,7 +494,7 @@ ${steps}
   <section class="studio section" id="studio" aria-labelledby="studio-title">
     <div class="container studio-grid">
       <figure class="studio-media reveal">
-        <img src="assets/projects/planting-southern-home-live-oaks.webp" width="1455" height="1081" alt="A stately Southern home shaded by mature live oaks." loading="lazy" decoding="async">
+        <img src="assets/gallery/planting-southern-home-live-oaks.webp" width="1455" height="1081" alt="A stately Southern home shaded by mature live oaks." loading="lazy" decoding="async">
       </figure>
       <div class="studio-body reveal">
         <p class="eyebrow">The studio</p>
@@ -521,9 +612,9 @@ fs.writeFileSync(OUT, html);
 // Fresh manifest describing the production asset library.
 const manifest = {
   generated: new Date().toISOString().slice(0, 10),
-  structure: { hero: 'assets/hero', projects: 'assets/projects', renderings: 'assets/renderings' },
+  structure: { hero: 'assets/hero', gallery: 'assets/gallery', renderings: 'assets/renderings', projects: 'assets/projects (case studies)' },
   hero: ['hero-luxury-estate-pool-twilight.webp', 'hero-luxury-landscape-pool-sunset.webp', 'hero-southern-estate-daylight.webp'],
-  projects: ITEMS.map(([cat, file, w, h, alt]) => ({ file: 'assets/projects/' + file, category: cat, width: w, height: h, alt })),
+  gallery: ITEMS.map(([cat, file, w, h, alt]) => ({ file: 'assets/gallery/' + file, category: cat, width: w, height: h, alt })),
   renderings: PLANS.map(([file, w, h, title, meta, alt]) => ({ file: 'assets/' + file, project: title, location: meta, width: w, height: h, alt })),
 };
 fs.writeFileSync(path.join(REPO, 'assets/manifest.json'), JSON.stringify(manifest, null, 2));
