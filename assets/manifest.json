@@ -12,95 +12,123 @@
   ],
   "projects": [
     {
-      "file": "assets/projects/planting-southern-home-live-oaks.webp",
-      "category": "planting",
-      "width": 1455,
-      "height": 1081,
-      "alt": "A stately Southern home shaded by mature live oaks."
-    },
-    {
-      "file": "assets/projects/planting-coastal-hydrangea-garden-path.webp",
-      "category": "planting",
-      "width": 1448,
-      "height": 1086,
-      "alt": "A coastal garden pathway bordered by blooming hydrangeas."
-    },
-    {
-      "file": "assets/projects/planting-formal-front-garden.webp",
-      "category": "planting",
-      "width": 1448,
-      "height": 1086,
-      "alt": "A symmetrical formal front garden with clipped hedging."
-    },
-    {
-      "file": "assets/projects/planting-formal-estate-drive.webp",
-      "category": "planting",
-      "width": 1448,
-      "height": 1086,
-      "alt": "A formal estate drive framed by manicured plantings."
-    },
-    {
-      "file": "assets/projects/planting-courtyard-japanese-maple.webp",
-      "category": "planting",
-      "width": 1405,
-      "height": 1120,
-      "alt": "A courtyard planting anchored by a Japanese maple."
-    },
-    {
-      "file": "assets/projects/planting-privacy-hedge-walkway.webp",
-      "category": "planting",
-      "width": 1241,
-      "height": 1268,
-      "alt": "A garden walkway screened by a tall privacy hedge."
-    },
-    {
       "file": "assets/projects/water-luxury-pool-courtyard.webp",
-      "category": "water",
+      "category": "pools",
       "width": 1451,
       "height": 1084,
       "alt": "A luxury pool set within a landscaped courtyard."
     },
     {
       "file": "assets/projects/water-pool-spa-stone-waterwall.webp",
-      "category": "water",
+      "category": "pools",
       "width": 1448,
       "height": 1086,
       "alt": "A pool and spa with a stone water wall."
     },
     {
       "file": "assets/projects/water-estate-swimming-pool.webp",
-      "category": "water",
+      "category": "pools",
       "width": 1448,
       "height": 1086,
       "alt": "An estate swimming pool on a clear day."
     },
     {
       "file": "assets/projects/water-backyard-family-pool.webp",
-      "category": "water",
+      "category": "pools",
       "width": 1448,
       "height": 1086,
       "alt": "A backyard family pool in bright daylight."
     },
     {
       "file": "assets/projects/water-covered-spa-twilight.webp",
-      "category": "water",
+      "category": "pools",
       "width": 1537,
       "height": 1023,
       "alt": "A covered spa beside the pool at twilight."
     },
     {
+      "file": "assets/projects/estate-pool-golden-hour.webp",
+      "category": "pools",
+      "width": 1448,
+      "height": 1086,
+      "alt": "An estate and pool bathed in golden-hour light."
+    },
+    {
+      "file": "assets/projects/planting-courtyard-japanese-maple.webp",
+      "category": "courtyards",
+      "width": 1405,
+      "height": 1120,
+      "alt": "A courtyard planting anchored by a Japanese maple."
+    },
+    {
+      "file": "assets/projects/water-sculpture-reflecting-pool.webp",
+      "category": "courtyards",
+      "width": 1254,
+      "height": 1254,
+      "alt": "A sculptural reflecting pool in a modern courtyard."
+    },
+    {
+      "file": "assets/projects/hardscape-white-brick-courtyard.webp",
+      "category": "courtyards",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A bright white-brick courtyard with paved surfaces."
+    },
+    {
+      "file": "assets/projects/hardscape-modern-courtyard-paving.webp",
+      "category": "courtyards",
+      "width": 1270,
+      "height": 1239,
+      "alt": "A modern courtyard with clean paved hardscape."
+    },
+    {
+      "file": "assets/projects/planting-coastal-hydrangea-garden-path.webp",
+      "category": "gardens",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A coastal garden pathway bordered by blooming hydrangeas."
+    },
+    {
+      "file": "assets/projects/planting-formal-front-garden.webp",
+      "category": "gardens",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A symmetrical formal front garden with clipped hedging."
+    },
+    {
+      "file": "assets/projects/planting-privacy-hedge-walkway.webp",
+      "category": "gardens",
+      "width": 1241,
+      "height": 1268,
+      "alt": "A garden walkway screened by a tall privacy hedge."
+    },
+    {
+      "file": "assets/projects/planting-southern-home-live-oaks.webp",
+      "category": "gardens",
+      "width": 1455,
+      "height": 1081,
+      "alt": "A stately Southern home shaded by mature live oaks."
+    },
+    {
       "file": "assets/projects/water-formal-garden-fountain.webp",
-      "category": "water",
+      "category": "gardens",
       "width": 1254,
       "height": 1254,
       "alt": "A symmetrical garden fountain surrounded by planting."
     },
     {
-      "file": "assets/projects/water-sculpture-reflecting-pool.webp",
-      "category": "water",
-      "width": 1254,
-      "height": 1254,
-      "alt": "A sculptural reflecting pool in a modern courtyard."
+      "file": "assets/projects/estate-manicured-lawn.webp",
+      "category": "gardens",
+      "width": 1122,
+      "height": 1402,
+      "alt": "An estate framed by an expansive manicured lawn."
+    },
+    {
+      "file": "assets/projects/estate-aerial-grounds.webp",
+      "category": "gardens",
+      "width": 1448,
+      "height": 1086,
+      "alt": "An aerial view of a landscaped estate and grounds."
     },
     {
       "file": "assets/projects/lighting-infinity-pool-night.webp",
@@ -138,32 +166,39 @@
       "alt": "Architectural columns lit at night."
     },
     {
-      "file": "assets/projects/hardscape-white-brick-courtyard.webp",
-      "category": "hardscapes",
+      "file": "assets/projects/planting-formal-estate-drive.webp",
+      "category": "entrances",
       "width": 1448,
       "height": 1086,
-      "alt": "A bright white-brick courtyard with paved surfaces."
+      "alt": "A formal estate drive framed by manicured plantings."
     },
     {
       "file": "assets/projects/hardscape-brick-garden-gateway.webp",
-      "category": "hardscapes",
+      "category": "entrances",
       "width": 1448,
       "height": 1086,
       "alt": "A brick garden gateway framing the entrance."
     },
     {
-      "file": "assets/projects/hardscape-modern-courtyard-paving.webp",
-      "category": "hardscapes",
-      "width": 1270,
-      "height": 1239,
-      "alt": "A modern courtyard with clean paved hardscape."
-    },
-    {
       "file": "assets/projects/hardscape-brick-entry-fountain.webp",
-      "category": "hardscapes",
+      "category": "entrances",
       "width": 1132,
       "height": 1390,
       "alt": "A brick entryway with a stone fountain."
+    },
+    {
+      "file": "assets/projects/estate-white-front-elevation.webp",
+      "category": "entrances",
+      "width": 1448,
+      "height": 1086,
+      "alt": "The front elevation of a white estate with formal landscaping."
+    },
+    {
+      "file": "assets/projects/estate-architectural-detail.webp",
+      "category": "entrances",
+      "width": 1086,
+      "height": 1448,
+      "alt": "A close architectural detail of an estate exterior."
     }
   ],
   "renderings": [
