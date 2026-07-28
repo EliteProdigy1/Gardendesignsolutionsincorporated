@@ -66,69 +66,58 @@ const PLANS = [
 const TAYS = 'renderings/tays-memorial-garden-plan-mobile-al.webp';
 
 /* ==========================================================================
-   Before & After comparison slider — data-driven framework.
-   The whole section stays HIDDEN while every entry is `enabled:false`.
-   To publish a pair: drop matched -before/-after webp in assets/images/before-after,
-   set enabled:true, and fill title/category/alt. Supports 3–5 pairs.
+   Before / During / After — project case studies (schema-driven).
+   Data lives in scripts/projects.js. The whole section stays HIDDEN while every
+   project is `enabled:false`, and renders automatically once one is enabled.
    ========================================================================== */
-const BA_DISCLOSURE = 'Conceptual project visualization shown for design storytelling. Historical before and construction photography was not available.';
-const BA = 'assets/images/before-after';
-// NOTE: these entries are DISABLED placeholders. The images are conceptual
-// AI-generated visualizations, not verified historical documentation, so the
-// section is hidden until verified before/after photography replaces them.
-const BEFORE_AFTER = [
-  {
-    id: 'project-01', enabled: false, status: 'concept',
-    title: 'Southern Estate Pool & Courtyard', category: 'Estate Pool · Fairhope, Alabama',
-    disclosure: BA_DISCLOSURE,
-    before: { src: BA + '/project-01-before.webp', alt: 'Conceptual "before" view: a white Southern estate with an open, unplanted lawn.' },
-    after: { src: BA + '/project-01-after.webp', alt: 'The estate with a rectilinear pool, stone terrace, clipped hedging and loungers in warm light.' },
-  },
-  {
-    id: 'project-02', enabled: false, status: 'concept',
-    title: 'Southern Estate Pool & Courtyard', category: 'Pool Terrace · Fairhope, Alabama',
-    disclosure: BA_DISCLOSURE,
-    before: { src: BA + '/project-02-before.webp', alt: 'Conceptual "before" view: the estate grounds without the pool terrace.' },
-    after: { src: BA + '/project-02-after.webp', alt: 'A pool terrace with two loungers under white umbrellas beside reflecting water and trees.' },
-  },
-  {
-    id: 'project-03', enabled: false, status: 'concept',
-    title: 'Southern Estate Pool & Courtyard', category: 'Courtyard Spa · Fairhope, Alabama',
-    disclosure: BA_DISCLOSURE,
-    before: { src: BA + '/project-03-before.webp', alt: 'Conceptual "before" view: the covered courtyard area without the spa.' },
-    after: { src: BA + '/project-03-after.webp', alt: 'A covered stone loggia with an illuminated spa, lantern and planting at dusk.' },
-  },
-  // Add project-04 / project-05 here as verified pairs arrive.
-];
+const { PROJECTS } = require('./projects.js');
 
-function baFigure(e, i) {
-  const eager = i === 0; // first comparison may load eagerly; rest lazy
-  const load = eager ? '' : ' loading="lazy"';
-  const disc = e.disclosure ? `\n        <p class="ba-disclosure">${esc(e.disclosure)}</p>` : '';
-  const cat = e.category ? `<span class="ba-cat">${esc(e.category)}</span>` : '';
-  return `      <figure class="ba reveal">
-        <div class="ba-frame" data-ba style="--pos:50%">
-          <img class="ba-img ba-after" src="${e.after.src}" width="2400" height="1600" alt="${esc(e.after.alt)}"${load} decoding="async">
-          <img class="ba-img ba-before" src="${e.before.src}" width="2400" height="1600" alt="${esc(e.before.alt)}"${load} decoding="async">
-          <span class="ba-label ba-label--before" aria-hidden="true">Before</span>
-          <span class="ba-label ba-label--after" aria-hidden="true">After</span>
-          <span class="ba-divider" aria-hidden="true"></span>
-          <button class="ba-handle" type="button" role="slider" aria-label="Reveal before or after — ${esc(e.title)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-            <span aria-hidden="true">&#8249;&#8250;</span>
-          </button>
+function baFigure(c, i, project) {
+  const load = i === 0 ? '' : ' loading="lazy"'; // first comparison eager, rest lazy
+  const lbl = esc(project.name + (c.label ? ' — ' + c.label : ''));
+  return `        <figure class="ba reveal">
+          <div class="ba-frame" data-ba style="--pos:50%">
+            <img class="ba-img ba-after" src="${c.after.src}" width="2400" height="1600" alt="${esc(c.after.alt)}"${load} decoding="async">
+            <img class="ba-img ba-before" src="${c.before.src}" width="2400" height="1600" alt="${esc(c.before.alt)}"${load} decoding="async">
+            <span class="ba-label ba-label--before" aria-hidden="true">Before</span>
+            <span class="ba-label ba-label--after" aria-hidden="true">After</span>
+            <span class="ba-divider" aria-hidden="true"></span>
+            <button class="ba-handle" type="button" role="slider" aria-label="Reveal before or after — ${lbl}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <span aria-hidden="true">&#8249;&#8250;</span>
+            </button>
+          </div>
+          ${c.label ? `<figcaption class="ba-cap"><span class="ba-cat">${esc(c.label)}</span></figcaption>` : ''}
+        </figure>`;
+}
+
+function projectArticle(p) {
+  const meta = [p.city, p.completionYear].filter(Boolean).join(' · ');
+  const services = (p.services && p.services.length)
+    ? `<ul class="project-services">${p.services.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : '';
+  const story = p.story ? `<p class="project-story">${esc(p.story)}</p>` : '';
+  const disc = (p.status === 'concept' && p.disclosure) ? `<p class="ba-disclosure">${esc(p.disclosure)}</p>` : '';
+  const comps = p.comparisons.map((c, i) => baFigure(c, i, p)).join('\n');
+  return `      <article class="project reveal">
+        <div class="project-head">
+          ${p.featured ? '<span class="project-flag">Featured project</span>' : ''}
+          <h3 class="project-name">${esc(p.name)}</h3>
+          ${meta ? `<p class="project-meta">${esc(meta)}</p>` : ''}
+          ${services}
+          ${story}
         </div>
-        <figcaption class="ba-cap">
-          ${cat}
-          <span class="ba-title">${esc(e.title)}</span>${disc}
-        </figcaption>
-      </figure>`;
+        <div class="ba-grid">
+${comps}
+        </div>
+        ${disc}
+      </article>`;
 }
 
 function beforeAfterSection() {
-  const live = BEFORE_AFTER.filter((e) => e.enabled);
-  if (!live.length) return ''; // hidden until at least one verified pair is enabled
+  const live = PROJECTS.filter((p) => p.enabled);
+  if (!live.length) return ''; // hidden until at least one project is enabled
+  live.sort((a, b) => (b.featured === true) - (a.featured === true)); // featured first
   return `
-  <!-- BEFORE & AFTER -->
+  <!-- BEFORE / DURING / AFTER — project case studies (hidden until a project is enabled) -->
   <section class="beforeafter section" id="before-after" aria-labelledby="ba-title">
     <div class="container">
       <div class="section-head reveal">
@@ -136,8 +125,8 @@ function beforeAfterSection() {
         <h2 class="display" id="ba-title">The transformation.</h2>
         <p class="section-lede">Drag, or use the arrow keys, to move between the two states of each space.</p>
       </div>
-      <div class="ba-grid">
-${live.map(baFigure).join('\n')}
+      <div class="project-list">
+${live.map(projectArticle).join('\n')}
       </div>
     </div>
   </section>

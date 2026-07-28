@@ -25,14 +25,33 @@ Supports **3–5 project pairs** — add `project-04-*`, `project-05-*` as neede
 
 ## How to add / enable a project (data-driven — no component edits)
 
-Everything is driven by the `BEFORE_AFTER` array in the site generator
-(`scripts/build-gdsi.js`). To publish a pair:
+Everything is driven by the **project schema** in **`scripts/projects.js`**.
+Each project supports:
 
-1. Put the matched `-before.webp` and `-after.webp` in this folder.
-2. In `BEFORE_AFTER`, set the entry's `enabled: true` and fill in
-   `title`, `category`, and `before.alt` / `after.alt`.
-3. Rebuild. The whole **Before & After section stays hidden while every entry
-   is `enabled: false`**, and appears automatically once at least one is enabled.
+| Field | Meaning |
+|-------|---------|
+| `enabled` | **The one flag** that publishes the project. |
+| `featured` | Featured toggle (pinned first). |
+| `status` | `concept` (shows disclosure, no historical claims) or `verified`. |
+| `name` | Project Name. |
+| `city` | City. |
+| `completionYear` | Completion Year (`null` until verified — never invented). |
+| `services` | Services Performed (rendered as chips). |
+| `categories` | Portfolio Categories (`pools · courtyards · gardens · lighting · entrances`). |
+| `story` | Project Story (`null` until written). |
+| `comparisons` | List of Before / During / After image sets `{ label, before, during, after }`. |
+
+To publish a project:
+
+1. Drop the matched `-before.webp` / `-after.webp` (and optional `-during.webp`)
+   into this folder.
+2. In `scripts/projects.js`, fill the fields and set **`enabled: true`**.
+3. Rebuild (`node scripts/build-gdsi.js`). The whole **section stays hidden
+   while every project is `enabled: false`**, and appears automatically once
+   one is enabled. Supports 3–5+ projects, each with multiple comparisons.
+
+> The live slider compares **before ↔ after**. `during` images are stored now
+> and reserved for the future three-stage / case-study view.
 
 ## ⚠️ Truthfulness / disclosure
 

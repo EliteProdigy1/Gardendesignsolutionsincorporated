@@ -485,6 +485,15 @@ a { color: inherit; text-decoration: none; }
    Before & After comparison slider
    ========================================================================== */
 .beforeafter { background: var(--ivory-2); }
+.project-list { display: grid; gap: clamp(56px, 9vw, 110px); }
+.project { display: block; }
+.project-head { max-width: 760px; margin-bottom: clamp(28px, 4vw, 44px); }
+.project-flag { display: inline-block; font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); margin-bottom: 12px; }
+.project-name { font-family: var(--serif); font-weight: 300; font-size: clamp(26px, 3.4vw, 42px); line-height: 1.1; color: var(--green); margin: 0; }
+.project-meta { font-family: var(--sans); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 12px 0 0; }
+.project-services { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.project-services li { font-family: var(--sans); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); border: 1px solid var(--line); border-radius: 40px; padding: 7px 14px; }
+.project-story { margin: 22px 0 0; color: var(--ink-soft); font-size: clamp(16px, 1.6vw, 18px); line-height: 1.6; max-width: 62ch; }
 .ba-grid { display: grid; gap: clamp(40px, 6vw, 72px); }
 .ba { margin: 0; }
 .ba-frame {
@@ -560,6 +569,16 @@ body::before {
 
 /* Brass text-selection accent */
 ::selection { background: rgba(169, 134, 63, 0.22); color: var(--green); }
+
+/* Editorial trailing rule on section eyebrows */
+.section-head .eyebrow { display: inline-flex; align-items: center; gap: 14px; }
+.section-head .eyebrow::after { content: ""; width: 32px; height: 1px; background: currentColor; opacity: 0.45; }
+
+/* Mobile: stack the hero CTAs full-width for larger tap targets */
+@media (max-width: 520px) {
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .scroll-progress { display: none; }
