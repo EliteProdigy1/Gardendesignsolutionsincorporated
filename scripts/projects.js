@@ -1,73 +1,136 @@
 /* ==========================================================================
-   GDSI CASE STUDY SYSTEM — the single, editable data contract for the whole
-   portfolio. Designed to scale to hundreds of projects. This is the "admin"
-   surface: to publish a project you drop its media into
-   assets/projects/<slug>/… and set `enabled: true`. Nothing renders publicly
-   while a project is disabled, and only the sub-sections that HAVE data are
-   shown (every section is data-driven).
+   GDSI PROJECT ENGINE — the single, editable data contract for the whole
+   portfolio. One project = one record here. Nothing about a project is ever
+   duplicated inside a page template; every surface (homepage cards, featured
+   rail, category filters, related rail, project page, sitemap, structured
+   data, Open Graph) is derived from these records.
 
-   Per-project asset folders (assets/projects/<slug>/):
-     plans/  before/  during/  after/  twilight/  drone/  details/  video/  pdf/
+   Designed to scale to hundreds of projects. To PUBLISH a project you:
+     1. Drop its media into  assets/originals/projects/<slug>/<stage>/…
+     2. Run  npm run media   (generates AVIF/WebP/srcset for the new masters)
+     3. Fill the record below and set  enabled: true
+     4. Run  npm run build   (regenerates homepage, /projects/<slug>/, sitemap)
 
-   ── Schema ────────────────────────────────────────────────────────────────
-   slug           : string   — folder + future URL (/projects/<slug>).
-   enabled        : boolean  — THE one flag that publishes the project.
-   featured       : boolean  — Featured toggle (sorted first).
-   status         : 'concept' | 'verified'  — 'concept' shows the disclosure and
-                    makes no historical claims; 'verified' = real documentation.
+   Per-project asset stages (assets/originals/projects/<slug>/):
+     plans/ before/ during/ after/ completed/ twilight/ drone/ details/ video/ pdf/
 
-   PROJECT INFORMATION
-   name, city, completionYear (number|null — never invented), services[],
-   categories[] (pools·courtyards·gardens·lighting·entrances), story (string|null).
-
-   LANDSCAPE INFORMATION  (drives Project Specifications)
-   plantPalette[]        — plant names.
-   hardscapeMaterials[]  — materials.
-   lightingSystem        — string|null.
-   irrigation            — string|null.
-   specialFeatures[]     — notable features.
-
-   MEDIA  (each item = { src, alt }; arrays may be empty)
-   media.plan          — { src, alt } single landscape plan image (Plan Viewer).
-   media.pdf           — string path to a downloadable plan PDF (optional).
-   media.video         — { src, poster, title } (optional).
-   media.before[]      — Before photography.
-   media.construction[]— During / construction photography (Construction Timeline).
-   media.completedDay[]— Completed day photography.
-   media.twilight[]    — Twilight photography.
-   media.drone[]       — Drone photography.
-   media.details[]     — Detail photography.
-
-   comparisons[]  — Before/During/After slider sets: { label, before, during, after }.
-
-   INTERACTIVE SECTIONS render automatically when their data exists:
-     Plan Viewer (media.plan) · Before/During/After Slider (comparisons) ·
-     Construction Timeline (media.construction) · Gallery (any gallery media) ·
-     Project Specifications (landscape information) · Download PDF (media.pdf).
-
-   Image spec: 3:2, 2400×1600 px or larger, matched camera angle for pairs.
+   ── HONESTY RULES (enforced, never bypass) ────────────────────────────────
+   • Never invent business facts: names, addresses, completion years, awards,
+     testimonials, statistics, team names, plant/material lists.
+   • status:'concept' → the disclosure renders and NO historical claim is made.
+     Conceptual/AI imagery must never be presented as documented "before"
+     photography. status:'verified' → real documentation only.
+   • Empty fields and empty sections never render.
+   • Do NOT set enabled:true on a concept project without explicit instruction.
    ========================================================================== */
 
 const CONCEPT_DISCLOSURE =
   'Conceptual project visualization shown for design storytelling. Historical before and construction photography was not available.';
 
-// helper: master path for a project's media (under assets/originals/…); the
-// generator derives responsive AVIF/WebP from these via the media pipeline.
+// Master path for a project's media (under assets/originals/…). The media
+// pipeline derives responsive AVIF/WebP from these.
 const media = (slug, stage, file) => `assets/originals/projects/${slug}/${stage}/${file}`;
+
+/* ── Schema reference ───────────────────────────────────────────────────────
+   IDENTITY      id (stable, never reused) · slug (folder + /projects/<slug>/ URL)
+   FLAGS         enabled · featured · status ('concept'|'verified')
+   INFO          name · city · completionYear(number|null) · services[] · categories[]
+   NARRATIVE     intro · challenge · vision · process · craft · outcome · story  (all string|null)
+   MEDIA         media.{ hero, plan, pdf, video, before[], during[], after[],
+                          completed[], twilight[], drone[], details[] }
+                 each image item = { src, alt }; hero = { src, alt }
+                 plan = { src, alt, callouts[] }  (callouts reserved for the
+                         future interactive plan viewer; see planCallout shape)
+   LANDSCAPE     plantPalette[] · hardscapeMaterials[] · lightingSystem · irrigation · specialFeatures[]
+   COMPARISONS   comparisons[] = { label, before:{src,alt}, during:{src,alt}, after:{src,alt} }
+   CREDITS       photographer · designer · builder · architect  (string|null)
+   PROOF         testimonials[] = { quote, attribution } · awards[] = { title, source, year|null }
+   RELATIONS     related[] = project ids (auto-falls back to same-category if empty)
+   SEO/SOCIAL    seo.title · seo.description · seo.socialImage (master src|null)
+
+   planCallout (reserved, not yet rendered): { x, y, type:'plant'|'material'|'lighting'|'timeline', label, detail }
+   ────────────────────────────────────────────────────────────────────────── */
+
+// Normalizer — guarantees every field exists with a safe default so partial
+// records are safe and empty sections simply never render.
+function defineProject(p) {
+  const m = p.media || {};
+  const seo = p.seo || {};
+  return {
+    id: p.id,
+    slug: p.slug,
+    enabled: p.enabled === true,
+    featured: p.featured === true,
+    status: p.status === 'verified' ? 'verified' : 'concept',
+
+    name: p.name || '',
+    city: p.city || null,
+    completionYear: typeof p.completionYear === 'number' ? p.completionYear : null,
+    services: p.services || [],
+    categories: p.categories || [],
+
+    intro: p.intro || null,
+    challenge: p.challenge || null,
+    vision: p.vision || null,
+    process: p.process || null,
+    craft: p.craft || null,
+    outcome: p.outcome || null,
+    story: p.story || null,
+
+    media: {
+      hero: m.hero || null,
+      plan: m.plan || null,
+      pdf: m.pdf || null,
+      video: m.video || null,
+      before: m.before || [],
+      during: m.during || m.construction || [],
+      after: m.after || [],
+      completed: m.completed || m.completedDay || [],
+      twilight: m.twilight || [],
+      drone: m.drone || [],
+      details: m.details || [],
+    },
+
+    plantPalette: p.plantPalette || [],
+    hardscapeMaterials: p.hardscapeMaterials || [],
+    lightingSystem: p.lightingSystem || null,
+    irrigation: p.irrigation || null,
+    specialFeatures: p.specialFeatures || [],
+
+    comparisons: p.comparisons || [],
+
+    photographer: p.photographer || null,
+    designer: p.designer || null,
+    builder: p.builder || null,
+    architect: p.architect || null,
+
+    testimonials: p.testimonials || [],
+    awards: p.awards || [],
+    related: p.related || [],
+
+    disclosure: p.disclosure || (p.status === 'verified' ? null : CONCEPT_DISCLOSURE),
+    seo: {
+      title: seo.title || null,
+      description: seo.description || null,
+      socialImage: seo.socialImage || null,
+    },
+  };
+}
 
 const SLUG = 'southern-estate-pool-courtyard';
 
-const PROJECTS = [
+/* Raw records. Add a new object, run the 4-step publish flow above. */
+const RAW = [
   {
+    id: 'gdsi-0001',
     slug: SLUG,
-    enabled: false,          // ← flip to true (with verified media) to publish
+    enabled: false,            // ← concept work: stays hidden until instructed
     featured: false,
     status: 'concept',
 
-    // Project Information
     name: 'Southern Estate Pool & Courtyard',
     city: 'Fairhope, Alabama',
-    completionYear: null,    // unknown — do not invent
+    completionYear: null,      // unknown — never invented
     services: [
       'Landscape Architecture & Design',
       'Pool Design',
@@ -78,29 +141,36 @@ const PROJECTS = [
       'Project Management',
     ],
     categories: ['pools', 'courtyards', 'gardens', 'lighting', 'entrances'],
-    story: null,             // write when verified
 
-    // Landscape Information (drives Project Specifications) — fill when verified
+    // Narrative — write only when verified with the client.
+    intro: null,
+    challenge: null,
+    vision: null,
+    process: null,
+    craft: null,
+    outcome: null,
+    story: null,
+
+    // Landscape information — fill when verified.
     plantPalette: [],
     hardscapeMaterials: [],
     lightingSystem: null,
     irrigation: null,
     specialFeatures: [],
 
-    // Media — galleries empty until verified photography is added to the folders
     media: {
-      plan: null,            // { src: media(SLUG,'plans','plan.webp'), alt: '…' }
-      pdf: null,             // media(SLUG,'pdf','landscape-plan.pdf')
-      video: null,           // { src: media(SLUG,'video','tour.mp4'), poster: '…', title: '…' }
-      before: [],
-      construction: [],
-      completedDay: [],
-      twilight: [],
-      drone: [],
-      details: [],
+      hero: null,              // { src: media(SLUG,'after','estate-pool.webp'), alt: '…' }
+      plan: null,              // { src, alt, callouts: [] }
+      pdf: null,
+      video: null,
+      before: [], during: [], after: [], completed: [], twilight: [], drone: [], details: [],
     },
 
-    // Before / During / After slider (uses the migrated conceptual imagery)
+    // Credits / proof — never invented.
+    photographer: null, designer: null, builder: null, architect: null,
+    testimonials: [], awards: [], related: [],
+
+    // Before / During / After (conceptual imagery; disclosure shown).
     disclosure: CONCEPT_DISCLOSURE,
     comparisons: [
       {
@@ -122,10 +192,40 @@ const PROJECTS = [
         after: { src: media(SLUG, 'after', 'courtyard-spa.webp'), alt: 'A covered stone loggia with an illuminated spa, lantern and planting at dusk.' },
       },
     ],
+    seo: { title: null, description: null, socialImage: null },
   },
   // ── Add further projects here ──────────────────────────────────────────────
-  // Copy the block above, create assets/projects/<new-slug>/… , drop verified
-  // media into the stage folders, fill the fields, and set enabled: true.
+  // Copy the block above, give it a NEW stable id, create
+  // assets/originals/projects/<new-slug>/…, run `npm run media`, fill the
+  // fields, set enabled:true, then `npm run build`.
 ];
 
-module.exports = { PROJECTS, CONCEPT_DISCLOSURE };
+const PROJECTS = RAW.map(defineProject);
+
+/* ---- Query helpers (used by every derived output) ------------------------- */
+const byId = (id) => PROJECTS.find((p) => p.id === id) || null;
+const getEnabled = () => PROJECTS.filter((p) => p.enabled);
+const getFeatured = () => getEnabled().filter((p) => p.featured);
+const getBySlug = (slug) => PROJECTS.find((p) => p.slug === slug && p.enabled) || null;
+
+// Related projects: explicit ids first, then same-category enabled projects,
+// capped. Never returns the project itself or a disabled one.
+function relatedTo(project, limit) {
+  limit = limit || 3;
+  const out = [];
+  const push = (p) => { if (p && p.enabled && p.id !== project.id && out.indexOf(p) === -1) out.push(p); };
+  (project.related || []).forEach((id) => push(byId(id)));
+  if (out.length < limit) {
+    getEnabled().forEach((p) => {
+      if (out.length >= limit) return;
+      if (p.id === project.id) return;
+      if ((p.categories || []).some((c) => (project.categories || []).indexOf(c) !== -1)) push(p);
+    });
+  }
+  return out.slice(0, limit);
+}
+
+module.exports = {
+  PROJECTS, CONCEPT_DISCLOSURE, defineProject,
+  byId, getEnabled, getFeatured, getBySlug, relatedTo,
+};

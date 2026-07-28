@@ -3,7 +3,8 @@
   "structure": {
     "masters": "assets/originals/{hero,gallery,renderings,projects/<slug>/...}",
     "derivatives": "assets/generated/{avif,webp,thumbnails}/… (see media-manifest.json)",
-    "pipeline": "scripts/media-pipeline.js"
+    "pipeline": "scripts/media-pipeline.js",
+    "projectEngine": "scripts/projects.js → /projects/<slug>/ via scripts/build-projects.js"
   },
   "hero": [
     "hero-luxury-estate-pool-twilight.webp",

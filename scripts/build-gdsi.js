@@ -1,55 +1,19 @@
-/* GDSI static site generator — emits index.html + assets/manifest.json.
-   Production asset layout: assets/{css,js,hero,projects,renderings,...}. */
+/* GDSI static site generator — emits index.html, /projects/<slug>/index.html,
+   sitemap.xml and assets/manifest.json. Run with: node scripts/build-gdsi.js
+   Shared rendering + site constants live in scripts/lib.js; the project engine
+   lives in scripts/projects.js; project pages in scripts/build-projects.js. */
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
-// Repo root (this file lives in <repo>/scripts). Run with: node scripts/build-gdsi.js
-const REPO = path.resolve(__dirname, '..');
+const L = require('./lib.js');
+const { getFeatured, getEnabled } = require('./projects.js');
+const { buildProjectPages, projectCard } = require('./build-projects.js');
+const { writeSitemap } = require('./build-sitemap.js');
+
+const {
+  REPO, SITE, abs, CSS_V, JS_V, esc, picture, master, heroPreload, socialImageAbs,
+  headTags, navHTML, footerHTML, LIGHTBOX_HTML, jsonld,
+} = L;
 const OUT = path.join(REPO, 'index.html');
-
-// Content-hash the CSS/JS so their URLs change whenever they change — busts
-// browser caches on every deploy (no stale stylesheet after an edit).
-const hashOf = (rel) => crypto.createHash('md5').update(fs.readFileSync(path.join(REPO, rel))).digest('hex').slice(0, 8);
-const CSS_V = hashOf('assets/css/styles.css');
-const JS_V = hashOf('assets/js/main.js');
-
-// Responsive media manifest produced by scripts/media-pipeline.js (AVIF + WebP srcset).
-let MEDIA = {};
-try { MEDIA = JSON.parse(fs.readFileSync(path.join(REPO, 'assets/generated/media-manifest.json'), 'utf8')); }
-catch (e) { console.warn('WARN: media-manifest.json missing — run "npm run media" first. Falling back to originals.'); }
-
-const srcset = (list) => list.map((s) => `${s.src} ${s.w}w`).join(', ');
-const normKey = (s) => String(s).replace(/^assets\/originals\//, ''); // accept full path or bare key
-// Emit a responsive <picture> (AVIF + WebP) from the manifest. Accepts a bare
-// key ("gallery/x.webp") or a full master path ("assets/originals/gallery/x.webp").
-function picture(src, opts) {
-  opts = opts || {};
-  const key = normKey(src);
-  const sizes = opts.sizes || '100vw';
-  const alt = esc(opts.alt || '');
-  const cls = opts.imgClass ? ` class="${opts.imgClass}"` : '';
-  const load = opts.eager ? '' : ' loading="lazy"';
-  const fp = opts.eager ? ' fetchpriority="high"' : '';
-  const style = opts.style ? ` style="${opts.style}"` : '';
-  const m = MEDIA[key];
-  if (!m) {
-    return `<img src="assets/originals/${key}"${cls} alt="${alt}"${load} decoding="async"${fp}${style}>`;
-  }
-  const dims = ` width="${m.width}" height="${m.height}"`;
-  return `<picture>
-            <source type="image/avif" srcset="${srcset(m.avif)}" sizes="${sizes}">
-            <source type="image/webp" srcset="${srcset(m.webp)}" sizes="${sizes}">
-            <img src="${m.fallback}"${dims}${cls} alt="${alt}"${load} decoding="async"${fp}${style}>
-          </picture>`;
-}
-// Full-resolution master path (lightbox zoom target)
-const master = (src) => `assets/originals/${normKey(src)}`;
-// Hero <link rel=preload> with AVIF srcset (LCP)
-function heroPreload(key, sizes) {
-  const m = MEDIA[normKey(key)];
-  if (!m) return `<link rel="preload" as="image" href="assets/originals/${normKey(key)}" fetchpriority="high">`;
-  return `<link rel="preload" as="image" type="image/avif" imagesrcset="${srcset(m.avif)}" imagesizes="${sizes}" fetchpriority="high">`;
-}
 
 // Built Environments categories — completed spaces, grouped by what they are.
 const CATS = [
@@ -60,7 +24,7 @@ const CATS = [
   { key: 'entrances',  label: 'Estate Entrances' },
 ];
 
-// Built Environments items: [category, file(under assets/projects), w, h, alt]
+// Built Environments items: [category, file(under assets/originals/gallery), w, h, alt]
 const ITEMS = [
   ['pools', 'water-luxury-pool-courtyard.webp', 1451, 1084, 'A luxury pool set within a landscaped courtyard.'],
   ['pools', 'water-pool-spa-stone-waterwall.webp', 1448, 1086, 'A pool and spa with a stone water wall.'],
@@ -103,166 +67,6 @@ const PLANS = [
 ];
 const TAYS = 'renderings/tays-memorial-garden-plan-mobile-al.webp';
 
-/* ==========================================================================
-   Before / During / After — project case studies (schema-driven).
-   Data lives in scripts/projects.js. The whole section stays HIDDEN while every
-   project is `enabled:false`, and renders automatically once one is enabled.
-   ========================================================================== */
-const { PROJECTS } = require('./projects.js');
-
-function baFigure(c, i, project) {
-  const lbl = esc(project.name + (c.label ? ' — ' + c.label : ''));
-  const sz = '(min-width:900px) 46vw, 92vw';
-  return `        <figure class="ba reveal">
-          <div class="ba-frame" data-ba style="--pos:50%">
-            ${picture(c.after.src, { alt: c.after.alt, imgClass: 'ba-img ba-after', sizes: sz, eager: i === 0 })}
-            ${picture(c.before.src, { alt: c.before.alt, imgClass: 'ba-img ba-before', sizes: sz, eager: i === 0 })}
-            <span class="ba-label ba-label--before" aria-hidden="true">Before</span>
-            <span class="ba-label ba-label--after" aria-hidden="true">After</span>
-            <span class="ba-divider" aria-hidden="true"></span>
-            <button class="ba-handle" type="button" role="slider" aria-label="Reveal before or after — ${lbl}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-              <span aria-hidden="true">&#8249;&#8250;</span>
-            </button>
-          </div>
-          ${c.label ? `<figcaption class="ba-cap"><span class="ba-cat">${esc(c.label)}</span></figcaption>` : ''}
-        </figure>`;
-}
-
-/* --- Case-study sub-sections (each renders only when its data exists) --- */
-function csSubhead(eyebrow) { return `          <div class="cs-subhead"><span class="cs-eyebrow">${esc(eyebrow)}</span></div>`; }
-
-function csLightboxTile(item, group, caption) {
-  return `            <button class="cs-tile" type="button" data-group="${group}" data-full="${master(item.src)}" data-alt="${esc(item.alt || '')}" data-caption="${esc(caption || '')}" aria-label="View larger: ${esc(item.alt || caption || '')}">
-              ${picture(item.src, { alt: item.alt, sizes: '(min-width:900px) 22vw, 45vw' })}
-            </button>`;
-}
-
-function planBlock(p, group) {
-  const m = p.media.plan;
-  const pdf = p.media.pdf
-    ? `<a class="btn btn--brass btn--sm" href="${p.media.pdf}" download>Download plan (PDF)</a>` : '';
-  return `        <div class="cs-block reveal">
-${csSubhead('Landscape plan')}
-          <div class="cs-plan">
-            <button class="cs-plan-img cs-tile" type="button" data-group="${group}" data-full="${master(m.src)}" data-alt="${esc(m.alt || '')}" data-caption="Landscape plan — ${esc(p.name)}" aria-label="View the landscape plan full-screen">
-              ${picture(m.src, { alt: m.alt || 'Landscape plan', sizes: '(min-width:900px) 60vw, 92vw' })}
-            </button>
-            ${pdf}
-          </div>
-        </div>`;
-}
-
-function comparisonBlock(p) {
-  return `        <div class="cs-block reveal">
-${csSubhead('Before · During · After')}
-          <div class="ba-grid">
-${p.comparisons.map((c, i) => baFigure(c, i, p)).join('\n')}
-          </div>
-        </div>`;
-}
-
-function timelineBlock(p, group) {
-  const steps = p.media.construction.map((it, i) => `            <li class="cs-step">
-              <button class="cs-tile" type="button" data-group="${group}" data-full="${master(it.src)}" data-alt="${esc(it.alt || '')}" data-caption="Construction — ${esc(p.name)}" aria-label="View larger: ${esc(it.alt || 'construction')}">
-                ${picture(it.src, { alt: it.alt, sizes: '(min-width:900px) 31vw, 80vw' })}
-              </button>
-              <span class="cs-step-n">${String(i + 1).padStart(2, '0')}</span>
-            </li>`).join('\n');
-  return `        <div class="cs-block reveal">
-${csSubhead('Construction timeline')}
-          <ol class="cs-timeline">
-${steps}
-          </ol>
-        </div>`;
-}
-
-function galleryItems(p) {
-  const m = p.media;
-  return [].concat(
-    (m.completedDay || []).map((x) => ({ item: x, cap: 'Completed' })),
-    (m.twilight || []).map((x) => ({ item: x, cap: 'Twilight' })),
-    (m.drone || []).map((x) => ({ item: x, cap: 'Aerial' })),
-    (m.details || []).map((x) => ({ item: x, cap: 'Detail' })),
-  );
-}
-
-function galleryBlock(p, group, items) {
-  return `        <div class="cs-block reveal">
-${csSubhead('Gallery')}
-          <div class="cs-gallery">
-${items.map((g) => csLightboxTile(g.item, group, g.cap + ' — ' + p.name)).join('\n')}
-          </div>
-        </div>`;
-}
-
-function specsBlock(p) {
-  const rows = [];
-  if (p.plantPalette && p.plantPalette.length) rows.push(['Plant palette', p.plantPalette.join(', ')]);
-  if (p.hardscapeMaterials && p.hardscapeMaterials.length) rows.push(['Hardscape materials', p.hardscapeMaterials.join(', ')]);
-  if (p.lightingSystem) rows.push(['Lighting', p.lightingSystem]);
-  if (p.irrigation) rows.push(['Irrigation', p.irrigation]);
-  if (p.specialFeatures && p.specialFeatures.length) rows.push(['Special features', p.specialFeatures.join(', ')]);
-  if (!rows.length) return '';
-  return `        <div class="cs-block reveal">
-${csSubhead('Project specifications')}
-          <dl class="cs-specs">
-${rows.map(([k, v]) => `            <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('\n')}
-          </dl>
-        </div>`;
-}
-
-function projectArticle(p) {
-  const group = 'case-' + p.slug;
-  const meta = [p.city, p.completionYear].filter(Boolean).join(' · ');
-  const services = (p.services && p.services.length)
-    ? `<ul class="project-services">${p.services.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : '';
-  const story = p.story ? `<p class="project-story">${esc(p.story)}</p>` : '';
-  const disc = (p.status === 'concept' && p.disclosure) ? `<p class="ba-disclosure">${esc(p.disclosure)}</p>` : '';
-
-  const blocks = [];
-  if (p.media && p.media.plan) blocks.push(planBlock(p, group));
-  if (p.comparisons && p.comparisons.length) blocks.push(comparisonBlock(p));
-  if (p.media && p.media.construction && p.media.construction.length) blocks.push(timelineBlock(p, group));
-  const gal = galleryItems(p);
-  if (gal.length) blocks.push(galleryBlock(p, group, gal));
-  const specs = specsBlock(p);
-  if (specs) blocks.push(specs);
-
-  return `      <article class="project reveal">
-        <div class="project-head">
-          ${p.featured ? '<span class="project-flag">Featured project</span>' : ''}
-          <h3 class="project-name">${esc(p.name)}</h3>
-          ${meta ? `<p class="project-meta">${esc(meta)}</p>` : ''}
-          ${services}
-          ${story}
-        </div>
-${blocks.join('\n')}
-        ${disc}
-      </article>`;
-}
-
-function caseStudiesSection() {
-  const live = PROJECTS.filter((p) => p.enabled);
-  if (!live.length) return ''; // hidden until at least one project is enabled
-  live.sort((a, b) => (b.featured === true) - (a.featured === true)); // featured first
-  return `
-  <!-- CASE STUDIES — the GDSI case-study system (hidden until a project is enabled) -->
-  <section class="casestudies section" id="case-studies" aria-labelledby="cs-title">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Case studies</p>
-        <h2 class="display" id="cs-title">From concept to completion.</h2>
-        <p class="section-lede">How each estate was designed, built, planted and illuminated — the full story, drawn from the plan to the finished ground.</p>
-      </div>
-      <div class="project-list">
-${live.map(projectArticle).join('\n')}
-      </div>
-    </div>
-  </section>
-`;
-}
-
-const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const labelFor = (k) => CATS.find((c) => c.key === k).label;
 
 function figure(it) {
@@ -288,7 +92,7 @@ function planCard(p) {
         </button>`;
 }
 
-// Services (five disciplines + full estate). [jump, filterKey|'', image(under assets/projects), title, copy]
+// Services (five disciplines + full estate). [jump, filterKey|'', image, title, copy]
 const SERVICES = [
   ['#built', 'gardens', 'gallery/planting-coastal-hydrangea-garden-path.webp', 'Planting Design', 'Seasonal structure, native and coastal palettes, and living architecture composed to settle into its site.'],
   ['#built', 'pools', 'gallery/water-luxury-pool-courtyard.webp', 'Water Features & Pools', 'Pools, spas, fountains and reflecting water composed as the quiet centre of an outdoor room.'],
@@ -333,6 +137,37 @@ function processStep(p, i) {
         </li>`;
 }
 
+// Featured / selected projects rail — data-driven, hidden until a project is
+// enabled. Cards link to the canonical /projects/<slug>/ page (single source).
+function featuredSection() {
+  const feat = getFeatured();
+  const list = feat.length ? feat : getEnabled();
+  if (!list.length) return '';
+  return `
+  <!-- SELECTED PROJECTS — derived from the project engine (hidden until enabled) -->
+  <section class="projects section" id="projects" aria-labelledby="projects-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Selected projects</p>
+        <h2 class="display" id="projects-title">From concept to completion.</h2>
+        <p class="section-lede">Individual estates, told in full — from the plan and the ground it stood on to the finished, planted and illuminated landscape.</p>
+      </div>
+      <div class="pcard-grid">
+${list.map((p) => projectCard(p, '')).join('\n')}
+      </div>
+    </div>
+  </section>
+`;
+}
+
+// Contact channels render only when verified (no invented phone/email).
+function contactChannels() {
+  const rows = [];
+  if (SITE.phone) rows.push(`<div><dt>Telephone</dt><dd><a href="tel:${SITE.phone.replace(/[^+\d]/g, '')}">${esc(SITE.phone)}</a></dd></div>`);
+  if (SITE.email) rows.push(`<div><dt>Email</dt><dd><a href="mailto:${esc(SITE.email)}">${esc(SITE.email)}</a></dd></div>`);
+  return rows.join('\n          ');
+}
+
 const chips = [`<button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All work</button>`]
   .concat(CATS.map((c) => `<button class="chip" type="button" data-filter="${c.key}" aria-pressed="false">${c.label}</button>`))
   .join('\n          ');
@@ -344,72 +179,61 @@ const steps = PROCESS.map(processStep).join('\n');
 
 const HERO = 'hero/hero-luxury-estate-pool-twilight.webp';
 
+// Homepage structured data — Organization + ProfessionalService + WebSite graph.
+const homepageJsonLd = jsonld({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': abs('#organization'),
+      name: SITE.name,
+      alternateName: SITE.shortName,
+      url: abs(''),
+      logo: abs('assets/logos/gdsi-logo.webp'),
+      foundingDate: SITE.founded,
+      areaServed: SITE.areaServed,
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': abs('#service'),
+      name: SITE.name,
+      alternateName: SITE.shortName,
+      description: 'Residential landscape design and construction along the Gulf Coast since 2002.',
+      url: abs(''),
+      image: socialImageAbs(HERO),
+      areaServed: SITE.areaServed,
+      foundingDate: SITE.founded,
+      parentOrganization: { '@id': abs('#organization') },
+      knowsAbout: ['Planting Design', 'Water Features', 'Pools', 'Landscape Lighting', 'Hardscapes', 'Landscape Architecture'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': abs('#website'),
+      name: SITE.name,
+      url: abs(''),
+      publisher: { '@id': abs('#organization') },
+    },
+  ],
+});
+
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Garden Design Solutions, Inc. — Residential Landscape Design &amp; Construction</title>
-  <meta name="description" content="Garden Design Solutions, Inc. (GDSI) has designed and built residential landscapes along the Gulf Coast since 2002 — planting design, pools and water features, lighting, hardscapes and hand-rendered landscape plans.">
-  <meta name="theme-color" content="#24352A">
-  <link rel="canonical" href="https://gdsi.netlify.app/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Garden Design Solutions, Inc.">
-  <meta property="og:description" content="Residential landscape design & construction along the Gulf Coast since 2002.">
-  <meta property="og:image" content="https://gdsi.netlify.app/assets/originals/${HERO}">
-  <meta property="og:url" content="https://gdsi.netlify.app/">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  ${heroPreload(HERO, "100vw")}
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=${CSS_V}">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Garden Design Solutions, Inc.",
-    "alternateName": "GDSI",
-    "description": "Residential landscape design and construction along the Gulf Coast since 2002.",
-    "url": "https://gdsi.netlify.app/",
-    "areaServed": "Gulf Coast",
-    "foundingDate": "2002",
-    "knowsAbout": ["Planting Design", "Water Features", "Pools", "Landscape Lighting", "Hardscapes", "Landscape Renderings"]
-  }
-  </script>
+${headTags({
+  title: 'Garden Design Solutions, Inc. — Residential Landscape Design & Construction',
+  description: 'Garden Design Solutions, Inc. (GDSI) has designed and built residential landscapes along the Gulf Coast since 2002 — planting design, pools and water features, lighting, hardscapes and hand-rendered landscape plans.',
+  canonical: abs(''),
+  ogType: 'website',
+  ogTitle: 'Garden Design Solutions, Inc.',
+  ogImage: socialImageAbs(HERO),
+  preload: heroPreload(HERO, '100vw'),
+})}
+${homepageJsonLd}
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
-<header class="nav" id="nav" data-state="top">
-  <div class="nav-inner">
-    <a class="brand" href="#top" aria-label="Garden Design Solutions, Inc. — home">
-      <img class="brand-logo" src="assets/logos/gdsi-logo.webp" width="1071" height="158" alt="Garden Design Solutions Incorporated" decoding="async">
-    </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#architecture">Architecture</a>
-      <a href="#built">Built</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#studio">Studio</a>
-      <a href="#contact" class="nav-cta">Enquire</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
-  </div>
-  <div class="mobile-nav" id="mobileNav" hidden>
-    <a href="#architecture">Architecture</a>
-    <a href="#built">Built</a>
-    <a href="#services">Services</a>
-    <a href="#process">Process</a>
-    <a href="#studio">Studio</a>
-    <a href="#contact">Enquire</a>
-  </div>
-</header>
+${navHTML('', '')}
 
 <main id="main">
   <span id="top"></span>
@@ -481,7 +305,7 @@ ${plans}
   <!-- DIVIDER -->
   <section class="divider divider--tall" aria-hidden="true">
     <div class="divider-media" data-parallax>
-      ${picture("hero/hero-southern-estate-daylight.webp", { alt: "", sizes: "100vw" })}
+      ${picture('hero/hero-southern-estate-daylight.webp', { alt: '', sizes: '100vw' })}
     </div>
   </section>
 
@@ -502,8 +326,7 @@ ${tiles}
       <p class="masonry-empty" id="masonryEmpty" hidden>No work in this category yet.</p>
     </div>
   </section>
-
-${caseStudiesSection()}
+${featuredSection()}
   <!-- PROCESS -->
   <section class="process section" id="process" aria-labelledby="process-title">
     <div class="container process-grid">
@@ -512,7 +335,7 @@ ${caseStudiesSection()}
         <h2 class="display" id="process-title">From first walk to full bloom.</h2>
         <p class="section-lede">Every project follows the same considered path — patient at the start, exacting through construction, and attentive long after planting.</p>
         <figure class="process-figure">
-          ${picture(TAYS, { alt: "A hand-rendered landscape design plan drawn from above.", sizes: "(min-width:900px) 40vw, 92vw" })}
+          ${picture(TAYS, { alt: 'A hand-rendered landscape design plan drawn from above.', sizes: '(min-width:900px) 40vw, 92vw' })}
         </figure>
       </div>
       <ol class="steps">
@@ -524,7 +347,7 @@ ${steps}
   <!-- DIVIDER -->
   <section class="divider" aria-hidden="true">
     <div class="divider-media" data-parallax>
-      ${picture("hero/hero-luxury-landscape-pool-sunset.webp", { alt: "", sizes: "100vw" })}
+      ${picture('hero/hero-luxury-landscape-pool-sunset.webp', { alt: '', sizes: '100vw' })}
     </div>
   </section>
 
@@ -532,7 +355,7 @@ ${steps}
   <section class="studio section" id="studio" aria-labelledby="studio-title">
     <div class="container studio-grid">
       <figure class="studio-media reveal">
-        ${picture("gallery/planting-southern-home-live-oaks.webp", { alt: "A stately Southern home shaded by mature live oaks.", sizes: "(min-width:820px) 48vw, 92vw" })}
+        ${picture('gallery/planting-southern-home-live-oaks.webp', { alt: 'A stately Southern home shaded by mature live oaks.', sizes: '(min-width:820px) 48vw, 92vw' })}
       </figure>
       <div class="studio-body reveal">
         <p class="eyebrow">The studio</p>
@@ -560,6 +383,7 @@ ${steps}
           <div><dt>Since</dt><dd>2002</dd></div>
           <div><dt>Region</dt><dd>Gulf Coast</dd></div>
           <div><dt>Focus</dt><dd>Residential landscape design &amp; construction</dd></div>
+          ${contactChannels()}
         </dl>
       </div>
 
@@ -605,40 +429,9 @@ ${steps}
   </section>
 </main>
 
-<footer class="footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <span class="brand-mark">GDSI</span>
-      <p>Garden Design Solutions, Inc.<br>Residential landscape design &amp; construction · Gulf Coast · Since 2002</p>
-    </div>
-    <nav class="footer-links" aria-label="Footer">
-      <a href="#architecture">Architecture</a>
-      <a href="#built">Built</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#studio">Studio</a>
-      <a href="#contact">Enquire</a>
-    </nav>
-    <p class="footer-legal">© <span id="year">2026</span> Garden Design Solutions, Inc. All rights reserved.</p>
-  </div>
-</footer>
+${footerHTML('')}
 
-<!-- Lightbox with zoom -->
-<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <div class="lb-toolbar">
-    <button class="lb-tool" id="lbZoomOut" type="button" aria-label="Zoom out">&minus;</button>
-    <button class="lb-tool" id="lbZoomIn" type="button" aria-label="Zoom in">&plus;</button>
-    <button class="lb-tool" id="lbFull" type="button" aria-label="Toggle full screen">⤢</button>
-    <button class="lb-tool" id="lbClose" type="button" aria-label="Close viewer">&times;</button>
-  </div>
-  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous image">&#8249;</button>
-  <figure class="lb-figure" id="lbFigure">
-    <img id="lbImg" src="" alt="" draggable="false">
-  </figure>
-  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next image">&#8250;</button>
-  <figcaption class="lb-cap" id="lbCap"></figcaption>
-  <p class="lb-hint" id="lbHint">Scroll or double-click to zoom · drag to pan</p>
-</div>
+${LIGHTBOX_HTML}
 
 <script src="assets/js/main.js?v=${JS_V}" defer></script>
 </body>
@@ -647,6 +440,10 @@ ${steps}
 
 fs.writeFileSync(OUT, html);
 
+// Reusable project pages + derived sitemap.
+const projectPages = buildProjectPages();
+const sitemapCount = writeSitemap(projectPages);
+
 // Fresh manifest describing the production asset library.
 const manifest = {
   generated: new Date().toISOString().slice(0, 10),
@@ -654,6 +451,7 @@ const manifest = {
     masters: 'assets/originals/{hero,gallery,renderings,projects/<slug>/...}',
     derivatives: 'assets/generated/{avif,webp,thumbnails}/… (see media-manifest.json)',
     pipeline: 'scripts/media-pipeline.js',
+    projectEngine: 'scripts/projects.js → /projects/<slug>/ via scripts/build-projects.js',
   },
   hero: ['hero-luxury-estate-pool-twilight.webp', 'hero-luxury-landscape-pool-sunset.webp', 'hero-southern-estate-daylight.webp'],
   gallery: ITEMS.map(([cat, file, w, h, alt]) => ({ master: 'assets/originals/gallery/' + file, category: cat, width: w, height: h, alt })),
@@ -663,3 +461,5 @@ fs.writeFileSync(path.join(REPO, 'assets/manifest.json'), JSON.stringify(manifes
 
 console.log('Wrote index.html (' + html.length + ' bytes)');
 console.log('Portfolio tiles:', ITEMS.length, '| Plans:', PLANS.length, '| Services:', SERVICES.length);
+console.log('Project pages:', projectPages.length, projectPages.map((p) => p.url).join(', ') || '(none — all disabled)');
+console.log('Sitemap URLs:', sitemapCount);
