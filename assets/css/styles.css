@@ -147,7 +147,18 @@ a { color: inherit; text-decoration: none; }
   content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 0;
   background: var(--brass); transition: width .4s var(--ease);
 }
-.nav-links a:not(.nav-cta):hover::after { width: 100%; }
+.nav-links a:not(.nav-cta):hover::after,
+.nav-links a:not(.nav-cta).is-active::after { width: 100%; }
+.nav-links a:not(.nav-cta).is-active { color: var(--brass-2); }
+.nav[data-state="scrolled"] .nav-links a:not(.nav-cta).is-active { color: var(--brass); }
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; z-index: 150; height: 2px; width: 100%;
+  transform: scaleX(var(--sp, 0)); transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--brass), var(--brass-2));
+  pointer-events: none; will-change: transform;
+}
 .nav-cta {
   border: 1px solid currentColor; padding: 8px 18px !important; border-radius: 2px; opacity: 1;
   color: var(--brass-2) !important;
@@ -488,7 +499,13 @@ a { color: inherit; text-decoration: none; }
 .studio-media.reveal.is-in img,
 .process-intro.reveal.is-in .process-figure img { transform: scale(1); }
 
+/* CTA arrow micro-interaction */
+.svc-cta span, .plan-cta span { display: inline-block; transition: transform .4s var(--ease); }
+.svc:hover .svc-cta span, .plan:hover .plan-cta span { transform: translateX(5px); }
+
 @media (prefers-reduced-motion: reduce) {
+  .scroll-progress { display: none; }
+  .svc-cta span, .plan-cta span { transition: none !important; transform: none !important; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .divider-media img { will-change: auto; transform: none !important; }
   .btn, .svc, .tile-btn img, .svc-img img, .plan, .plan-img img { transition: none !important; }

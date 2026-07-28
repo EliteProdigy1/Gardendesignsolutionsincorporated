@@ -14,6 +14,35 @@
   setNavState();
   window.addEventListener('scroll', setNavState, { passive: true });
 
+  /* ---- Scroll progress bar + scroll-spy (deterministic, one rAF pass) ---- */
+  var sp = document.getElementById('scrollProgress');
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a:not(.nav-cta)'));
+  var spySections = navLinks
+    .map(function (a) { return document.getElementById((a.getAttribute('href') || '').slice(1)); })
+    .filter(Boolean);
+  var scrollTick = false;
+  function onScrollFrame() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var r = max > 0 ? window.scrollY / max : 0;
+    if (sp) sp.style.setProperty('--sp', Math.max(0, Math.min(1, r)).toFixed(4));
+
+    if (spySections.length) {
+      var line = window.innerHeight * 0.35;
+      var current = null, best = -Infinity;
+      spySections.forEach(function (s) {
+        var top = s.getBoundingClientRect().top;
+        if (top <= line && top > best) { best = top; current = s; } // closest section above the line
+      });
+      navLinks.forEach(function (a) {
+        a.classList.toggle('is-active', !!current && a.getAttribute('href') === '#' + current.id);
+      });
+    }
+    scrollTick = false;
+  }
+  window.addEventListener('scroll', function () { if (!scrollTick) { requestAnimationFrame(onScrollFrame); scrollTick = true; } }, { passive: true });
+  window.addEventListener('resize', onScrollFrame);
+  onScrollFrame();
+
   /* ---- Mobile menu ---- */
   var toggle = document.getElementById('navToggle');
   var mobileNav = document.getElementById('mobileNav');
