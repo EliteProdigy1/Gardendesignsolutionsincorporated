@@ -1,0 +1,195 @@
+{
+  "generated": "2026-07-28",
+  "structure": {
+    "hero": "assets/hero",
+    "projects": "assets/projects",
+    "renderings": "assets/renderings"
+  },
+  "hero": [
+    "hero-luxury-estate-pool-twilight.webp",
+    "hero-luxury-landscape-pool-sunset.webp",
+    "hero-southern-estate-daylight.webp"
+  ],
+  "projects": [
+    {
+      "file": "assets/projects/planting-southern-home-live-oaks.webp",
+      "category": "planting",
+      "width": 1455,
+      "height": 1081,
+      "alt": "A stately Southern home shaded by mature live oaks."
+    },
+    {
+      "file": "assets/projects/planting-coastal-hydrangea-garden-path.webp",
+      "category": "planting",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A coastal garden pathway bordered by blooming hydrangeas."
+    },
+    {
+      "file": "assets/projects/planting-formal-front-garden.webp",
+      "category": "planting",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A symmetrical formal front garden with clipped hedging."
+    },
+    {
+      "file": "assets/projects/planting-formal-estate-drive.webp",
+      "category": "planting",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A formal estate drive framed by manicured plantings."
+    },
+    {
+      "file": "assets/projects/planting-courtyard-japanese-maple.webp",
+      "category": "planting",
+      "width": 1405,
+      "height": 1120,
+      "alt": "A courtyard planting anchored by a Japanese maple."
+    },
+    {
+      "file": "assets/projects/planting-privacy-hedge-walkway.webp",
+      "category": "planting",
+      "width": 1241,
+      "height": 1268,
+      "alt": "A garden walkway screened by a tall privacy hedge."
+    },
+    {
+      "file": "assets/projects/water-luxury-pool-courtyard.webp",
+      "category": "water",
+      "width": 1451,
+      "height": 1084,
+      "alt": "A luxury pool set within a landscaped courtyard."
+    },
+    {
+      "file": "assets/projects/water-pool-spa-stone-waterwall.webp",
+      "category": "water",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A pool and spa with a stone water wall."
+    },
+    {
+      "file": "assets/projects/water-estate-swimming-pool.webp",
+      "category": "water",
+      "width": 1448,
+      "height": 1086,
+      "alt": "An estate swimming pool on a clear day."
+    },
+    {
+      "file": "assets/projects/water-backyard-family-pool.webp",
+      "category": "water",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A backyard family pool in bright daylight."
+    },
+    {
+      "file": "assets/projects/water-covered-spa-twilight.webp",
+      "category": "water",
+      "width": 1537,
+      "height": 1023,
+      "alt": "A covered spa beside the pool at twilight."
+    },
+    {
+      "file": "assets/projects/water-formal-garden-fountain.webp",
+      "category": "water",
+      "width": 1254,
+      "height": 1254,
+      "alt": "A symmetrical garden fountain surrounded by planting."
+    },
+    {
+      "file": "assets/projects/water-sculpture-reflecting-pool.webp",
+      "category": "water",
+      "width": 1254,
+      "height": 1254,
+      "alt": "A sculptural reflecting pool in a modern courtyard."
+    },
+    {
+      "file": "assets/projects/lighting-infinity-pool-night.webp",
+      "category": "lighting",
+      "width": 1448,
+      "height": 1086,
+      "alt": "An infinity pool illuminated after dark."
+    },
+    {
+      "file": "assets/projects/lighting-pool-edge-night.webp",
+      "category": "lighting",
+      "width": 1448,
+      "height": 1086,
+      "alt": "Warm edge lighting around a pool at night."
+    },
+    {
+      "file": "assets/projects/lighting-courtyard-uplighting-dusk.webp",
+      "category": "lighting",
+      "width": 1448,
+      "height": 1086,
+      "alt": "Courtyard plantings and walls accented with uplighting at dusk."
+    },
+    {
+      "file": "assets/projects/lighting-stone-facade-night.webp",
+      "category": "lighting",
+      "width": 1229,
+      "height": 1280,
+      "alt": "A stone facade washed with exterior lighting at night."
+    },
+    {
+      "file": "assets/projects/lighting-architectural-columns-night.webp",
+      "category": "lighting",
+      "width": 1254,
+      "height": 1254,
+      "alt": "Architectural columns lit at night."
+    },
+    {
+      "file": "assets/projects/hardscape-white-brick-courtyard.webp",
+      "category": "hardscapes",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A bright white-brick courtyard with paved surfaces."
+    },
+    {
+      "file": "assets/projects/hardscape-brick-garden-gateway.webp",
+      "category": "hardscapes",
+      "width": 1448,
+      "height": 1086,
+      "alt": "A brick garden gateway framing the entrance."
+    },
+    {
+      "file": "assets/projects/hardscape-modern-courtyard-paving.webp",
+      "category": "hardscapes",
+      "width": 1270,
+      "height": 1239,
+      "alt": "A modern courtyard with clean paved hardscape."
+    },
+    {
+      "file": "assets/projects/hardscape-brick-entry-fountain.webp",
+      "category": "hardscapes",
+      "width": 1132,
+      "height": 1390,
+      "alt": "A brick entryway with a stone fountain."
+    }
+  ],
+  "renderings": [
+    {
+      "file": "assets/renderings/tays-memorial-garden-plan-mobile-al.webp",
+      "project": "Tay's Memorial Garden",
+      "location": "251 Tuthill Lane · Mobile, Alabama",
+      "width": 994,
+      "height": 1496,
+      "alt": "Landscape plan for Tay's Memorial Garden, a formal memorial garden in Mobile, Alabama."
+    },
+    {
+      "file": "assets/renderings/roberts-residence-plan-fairhope-al.webp",
+      "project": "The Roberts Residence",
+      "location": "14243 Scenic Hwy 98 · Fairhope, Alabama",
+      "width": 994,
+      "height": 1994,
+      "alt": "Landscape plan for the Roberts Residence on Mobile Bay in Fairhope, Alabama."
+    },
+    {
+      "file": "assets/renderings/connolly-residence-plan-gulf-breeze-fl.webp",
+      "project": "The Connolly Residence",
+      "location": "736 Peake's Point Drive · Gulf Breeze, Florida",
+      "width": 1490,
+      "height": 991,
+      "alt": "Landscape plan for the Connolly Residence on the bay channel in Gulf Breeze, Florida."
+    }
+  ]
+}
