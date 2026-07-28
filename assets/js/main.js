@@ -150,6 +150,40 @@
   var jumpAll = document.querySelector('[data-jump-all]');
   if (jumpAll) jumpAll.addEventListener('click', function () { applyFilter('all'); });
 
+  /* ---- Before & After comparison sliders (drag + touch + keyboard) ---- */
+  document.querySelectorAll('[data-ba]').forEach(function (frame) {
+    var handle = frame.querySelector('.ba-handle');
+    var dragging = false;
+    function setPos(p) {
+      p = Math.max(0, Math.min(100, p));
+      frame.style.setProperty('--pos', p + '%');
+      if (handle) handle.setAttribute('aria-valuenow', Math.round(p));
+    }
+    function posFromX(clientX) {
+      var r = frame.getBoundingClientRect();
+      return r.width ? ((clientX - r.left) / r.width) * 100 : 50;
+    }
+    // window-level move/up so a drag keeps tracking even off the frame (robust across browsers)
+    function onMove(e) { if (dragging) setPos(posFromX(e.clientX)); }
+    function onUp() { dragging = false; window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp); }
+    frame.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      setPos(posFromX(e.clientX));
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp);
+    });
+    if (handle) {
+      handle.addEventListener('keydown', function (e) {
+        var cur = parseFloat(handle.getAttribute('aria-valuenow')) || 50;
+        var step = e.shiftKey ? 10 : 2;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { setPos(cur - step); e.preventDefault(); }
+        else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { setPos(cur + step); e.preventDefault(); }
+        else if (e.key === 'Home') { setPos(0); e.preventDefault(); }
+        else if (e.key === 'End') { setPos(100); e.preventDefault(); }
+      });
+    }
+  });
+
   /* ==========================================================================
      Lightbox with zoom / pan
      ========================================================================== */
