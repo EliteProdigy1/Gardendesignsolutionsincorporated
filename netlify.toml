@@ -26,18 +26,19 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Long-cache immutable-ish static assets.
+# Long-cache images.
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/images/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
 
+# CSS/JS revalidate daily (no content hashing in filenames).
 [[headers]]
-  for = "/styles.css"
+  for = "/assets/css/*"
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
 [[headers]]
-  for = "/main.js"
+  for = "/assets/js/*"
   [headers.values]
     Cache-Control = "public, max-age=86400"
