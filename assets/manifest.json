@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-28",
+  "generated": "2026-07-29",
   "structure": {
     "masters": "assets/originals/{hero,gallery,renderings,projects/<slug>/...}",
     "derivatives": "assets/generated/{avif,webp,thumbnails}/… (see media-manifest.json)",

@@ -785,3 +785,43 @@ body::before {
   .hero-body .reveal, .phero-body .reveal { transition-delay: 0s !important; }
   .phero-media img { animation: none !important; transform: scale(1.05) !important; }
 }
+
+/* ==========================================================================
+   Plan-forward project hero (kind: 'plan-study') — leads with the drawing.
+   ========================================================================== */
+.phero--plan {
+  min-height: auto; display: block; overflow: visible;
+  background: linear-gradient(180deg, var(--green) 0%, var(--green-deep) 100%);
+  color: var(--ivory);
+  padding: calc(var(--section-y) * 0.72) 0 clamp(48px, 7vw, 88px);
+}
+.phero--plan .phero-plan-grid {
+  max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter);
+  display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(28px, 5vw, 72px); align-items: center;
+  padding-top: clamp(40px, 8vh, 96px);
+}
+.phero--plan .pcrumb { margin-bottom: 20px; }
+.phero--plan .phero-title { max-width: 16ch; text-shadow: none; }
+.phero--plan .phero-meta { color: var(--brass-2); }
+.phero-arch { font-family: var(--sans); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,247,241,0.72); margin: 10px 0 0; }
+.phero-plan-fig {
+  position: relative; background: var(--ivory); border: 1px solid rgba(250,247,241,0.16);
+  padding: clamp(10px, 1.4vw, 18px); border-radius: var(--r-sm); overflow: hidden;
+  box-shadow: var(--shadow-deep); cursor: zoom-in; display: block; width: 100%;
+}
+.phero-plan-fig img { width: 100%; height: auto; max-height: 76vh; object-fit: contain; transition: transform var(--dur-kb) var(--ease); }
+.phero-plan-fig:hover img { transform: scale(1.02); }
+.phero-plan-fig:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+.phero-plan-hint {
+  position: absolute; left: 50%; bottom: clamp(14px, 2vw, 22px); transform: translateX(-50%);
+  font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ivory); background: rgba(16,22,17,0.62); backdrop-filter: blur(3px);
+  padding: 8px 16px; border-radius: var(--r-pill); display: inline-flex; gap: 8px; align-items: center;
+  opacity: 0; transition: opacity var(--dur) var(--ease); pointer-events: none;
+}
+.phero-plan-fig:hover .phero-plan-hint, .phero-plan-fig:focus-visible .phero-plan-hint { opacity: 1; }
+@media (max-width: 860px) {
+  .phero--plan .phero-plan-grid { grid-template-columns: 1fr; gap: 26px; }
+  .phero-plan-hint { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .phero-plan-fig img { transition: none !important; transform: none !important; } }

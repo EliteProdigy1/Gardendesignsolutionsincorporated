@@ -19,6 +19,9 @@ const SITE = {
   region: 'Gulf Coast',
   areaServed: ['Fairhope, Alabama', 'Mobile, Alabama', 'Gulf Breeze, Florida', 'Gulf Coast'],
   themeColor: '#24352A',
+  // Business address — verified from the firm's own hand-rendered plan title
+  // blocks (already published on distributed drawings).
+  address: { street: '16612 Greeno Road', city: 'Fairhope', region: 'AL', postalCode: '36532', country: 'US' },
   // Contact channels render only when present (honest — no invented phone/email).
   // Populate `phone`/`email` here the moment the client verifies them.
   phone: null,

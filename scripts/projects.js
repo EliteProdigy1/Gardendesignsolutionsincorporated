@@ -65,7 +65,10 @@ function defineProject(p) {
 
     name: p.name || '',
     city: p.city || null,
+    address: p.address || null,       // full street address (only if already published/approved)
     completionYear: typeof p.completionYear === 'number' ? p.completionYear : null,
+    designYear: typeof p.designYear === 'number' ? p.designYear : null,   // plan/drawing year — never implies "built"
+    kind: p.kind === 'plan-study' ? 'plan-study' : 'built',               // 'plan-study' leads with the drawing
     services: p.services || [],
     categories: p.categories || [],
 
@@ -193,6 +196,89 @@ const RAW = [
       },
     ],
     seo: { title: null, description: null, socialImage: null },
+  },
+  /* ────────────────────────────────────────────────────────────────────────
+     FLAGSHIP LANDSCAPE-ARCHITECTURE STUDIES
+     Verified from the client's own hand-rendered GDSI plans (landscape
+     architect Paul Fontenot). These are DESIGN plans — not photographed
+     completed builds — so each page leads with the drawing (kind:'plan-study'),
+     names the architect, and lists only planting/features read directly from
+     the plan. No completion is claimed; no before/after; no invented facts.
+     ──────────────────────────────────────────────────────────────────────── */
+  {
+    id: 'gdsi-plan-connolly',
+    slug: 'connolly-residence',
+    enabled: true, featured: true, status: 'verified', kind: 'plan-study',
+    name: 'The Connolly Residence',
+    city: 'Gulf Breeze, Florida',
+    address: "736 Peake's Point Drive · Gulf Breeze, Florida",
+    completionYear: null, designYear: 2021,
+    services: ['Landscape Architecture & Design', 'Planting Design', 'Pool Design', 'Hardscape Design'],
+    categories: ['pools', 'gardens', 'entrances'],
+    architect: 'Paul Fontenot, GDSI',
+    designer: 'Garden Design Solutions, Inc.',
+    intro: "A hand-rendered landscape plan for a waterfront residence on Peake's Point Drive, drawn by GDSI landscape architect Paul Fontenot. The design frames the house between a formal motor-court arrival and a pool terrace addressing the bay channel, wrapped in a layered evergreen palette.",
+    vision: 'A measured composition that carries the eye from the arrival court, along planted walks, to the water — resolving pool, terrace and garden as a single waterfront room.',
+    hardscapeMaterials: ['Motor court', 'Pool with stucco-column water feature', 'Covered porches', 'Stucco columns', 'Retaining walls', 'Waterfront terrace (bay channel)'],
+    plantPalette: ['European Olive', "Nelle R. Stevens Holly", 'Japanese Yew', 'Asian Jasmine', "Hydrangea 'Limelight'", 'Agapanthus', 'Creeping Rosemary', 'Viburnum Suspensum', 'Eagleston Holly', "Loropetalum 'Platinum Beauty'", 'Camellia Japonica', 'Gardenia', 'Dwarf Pittosporum', "Crape Myrtle 'White'", 'Dwarf Cryptomeria', 'Boxwood', "Drift Roses 'White'", 'African Iris'],
+    media: {
+      plan: { src: 'assets/originals/renderings/connolly-residence-plan-gulf-breeze-fl.webp', alt: 'Hand-rendered landscape plan for the Connolly Residence on the bay channel in Gulf Breeze, Florida — motor court, planted grounds and a waterfront pool.', callouts: [] },
+    },
+    seo: {
+      title: 'The Connolly Residence — Waterfront Landscape Plan · Gulf Breeze, FL | GDSI',
+      description: 'A hand-rendered GDSI landscape architecture plan for a waterfront residence in Gulf Breeze, Florida — pool terrace, motor court and a layered coastal planting palette by Paul Fontenot.',
+      socialImage: 'assets/originals/renderings/connolly-residence-plan-gulf-breeze-fl.webp',
+    },
+  },
+  {
+    id: 'gdsi-plan-roberts',
+    slug: 'roberts-residence',
+    enabled: true, featured: true, status: 'verified', kind: 'plan-study',
+    name: 'The Roberts Residence',
+    city: 'Fairhope, Alabama',
+    address: '14243 Scenic Hwy 98 · Fairhope, Alabama',
+    completionYear: null, designYear: 2022,
+    services: ['Landscape Architecture & Design', 'Planting Design', 'Pool & Spa Design', 'Hardscape Design'],
+    categories: ['pools', 'gardens', 'courtyards', 'entrances'],
+    architect: 'Paul Fontenot, GDSI',
+    designer: 'Garden Design Solutions, Inc.',
+    intro: 'A hand-rendered landscape plan for an estate on Mobile Bay along Scenic Highway 98, drawn by GDSI landscape architect Paul Fontenot. The design sets a formal motor court and parterre garden against a bayfront pool, spa and pool house.',
+    vision: 'A symmetrical, axial plan that gathers arrival, garden and waterfront into one calm, formal sequence from the highway to the bay.',
+    hardscapeMaterials: ['Formal motor court', 'Pool and spa', 'Pool house', 'Parterre garden', 'Brick walks', 'Retaining walls', 'Waterfront frontage (Mobile Bay)'],
+    plantPalette: ['Eagleston Holly', 'Blue Hydrangea', 'Japanese Anise', 'Variegated Liriope', "Loropetalum 'Platinum Beauty'", "Dwarf Sasanqua 'White'", 'Boxwood', 'Asian Jasmine', 'Gardenia', 'Italian Cypress', 'Holly Fern', 'Indica Azalea', "Liriope 'Emerald Goddess'", 'Crape Myrtle', "Hydrangea 'Limelight'", 'Split-leaf Philodendron', 'Dwarf Ruellia'],
+    media: {
+      plan: { src: 'assets/originals/renderings/roberts-residence-plan-fairhope-al.webp', alt: 'Hand-rendered landscape plan for the Roberts Residence on Mobile Bay in Fairhope, Alabama — formal motor court, parterre garden and a bayfront pool, spa and pool house.', callouts: [] },
+    },
+    seo: {
+      title: 'The Roberts Residence — Bayfront Landscape Plan · Fairhope, AL | GDSI',
+      description: 'A hand-rendered GDSI landscape architecture plan for a Mobile Bay estate in Fairhope, Alabama — pool, spa, pool house, formal motor court and parterre garden by Paul Fontenot.',
+      socialImage: 'assets/originals/renderings/roberts-residence-plan-fairhope-al.webp',
+    },
+  },
+  {
+    id: 'gdsi-plan-tays',
+    slug: 'tays-memorial-garden',
+    enabled: true, featured: true, status: 'verified', kind: 'plan-study',
+    name: "Tay's Memorial Garden",
+    city: 'Mobile, Alabama',
+    address: '251 Tuthill Lane · Mobile, Alabama',
+    completionYear: null, designYear: 2022,
+    services: ['Landscape Architecture & Design', 'Planting Design', 'Hardscape Design'],
+    categories: ['gardens', 'courtyards'],
+    architect: 'Paul Fontenot, GDSI',
+    designer: 'Garden Design Solutions, Inc.',
+    intro: 'A hand-rendered plan for a formal memorial garden in Mobile, drawn by GDSI landscape architect Paul Fontenot. The garden is organized on a cross axis around a central fountain, enclosed by clipped hedges and brick walks between Old Shell Road and Tuthill Lane.',
+    vision: 'A quiet, symmetrical memorial garden — green rooms gathered around a central fountain and a wall fountain, framed for stillness.',
+    hardscapeMaterials: ['Central fountain', 'Wall fountain', 'Cross-axis brick walks', 'Brick borders', 'Stucco columns', 'Low fence with brick columns', 'Formal lawns'],
+    plantPalette: ['Asian Jasmine', 'Loropetalum', 'Camellia Japonica', 'Chinese Privet (tree form)', "Indica Azalea 'Gerbing'", 'Dwarf Boxwood'],
+    media: {
+      plan: { src: 'assets/originals/renderings/tays-memorial-garden-plan-mobile-al.webp', alt: "Hand-rendered landscape plan for Tay's Memorial Garden in Mobile, Alabama — a formal, symmetrical garden organized around a central fountain with cross-axis brick walks and clipped hedges.", callouts: [] },
+    },
+    seo: {
+      title: "Tay's Memorial Garden — Formal Garden Plan · Mobile, AL | GDSI",
+      description: "A hand-rendered GDSI landscape architecture plan for a formal memorial garden in Mobile, Alabama — a symmetrical, cross-axis composition around a central fountain by Paul Fontenot.",
+      socialImage: 'assets/originals/renderings/tays-memorial-garden-plan-mobile-al.webp',
+    },
   },
   // ── Add further projects here ──────────────────────────────────────────────
   // Copy the block above, give it a NEW stable id, create

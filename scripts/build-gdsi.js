@@ -69,6 +69,13 @@ const TAYS = 'renderings/tays-memorial-garden-plan-mobile-al.webp';
 
 const labelFor = (k) => CATS.find((c) => c.key === k).label;
 
+// Map a plan master file → its flagship project slug, so the "Hand-rendered
+// plans" cards route to the full case study (whose hero is the zoomable plan)
+// instead of duplicating it in a lightbox.
+const stripOrig = (s) => String(s).replace(/^assets\/originals\//, '');
+const PLAN_TO_SLUG = {};
+getEnabled().forEach((p) => { if (p.media.plan) PLAN_TO_SLUG[stripOrig(p.media.plan.src)] = p.slug; });
+
 function figure(it) {
   const [cat, file, w, h, alt] = it;
   const key = 'gallery/' + file;
@@ -82,8 +89,21 @@ function figure(it) {
 
 function planCard(p) {
   const [file, w, h, title, meta, alt] = p;
+  const slug = PLAN_TO_SLUG[stripOrig(file)];
+  const img = `<span class="plan-img">${picture(file, { alt, sizes: '(min-width:900px) 30vw, 45vw' })}</span>`;
+  if (slug) {
+    // Links to the flagship project page (which leads with the zoomable plan).
+    return `        <a class="plan reveal" href="projects/${slug}/" aria-label="View project: ${esc(title)}, ${esc(meta)}">
+          ${img}
+          <span class="plan-body">
+            <span class="plan-title">${esc(title)}</span>
+            <span class="plan-meta">${esc(meta)}</span>
+            <span class="plan-cta">View project<span aria-hidden="true"> →</span></span>
+          </span>
+        </a>`;
+  }
   return `        <button class="plan reveal" type="button" data-group="plans" data-full="${master(file)}" data-alt="${esc(alt)}" data-caption="${esc(title)} — ${esc(meta)}" aria-label="Open plan: ${esc(title)}, ${esc(meta)}">
-          <span class="plan-img">${picture(file, { alt, sizes: '(min-width:900px) 30vw, 45vw' })}</span>
+          ${img}
           <span class="plan-body">
             <span class="plan-title">${esc(title)}</span>
             <span class="plan-meta">${esc(meta)}</span>
@@ -140,8 +160,12 @@ function processStep(p, i) {
 // Featured / selected projects rail — data-driven, hidden until a project is
 // enabled. Cards link to the canonical /projects/<slug>/ page (single source).
 function featuredSection() {
-  const feat = getFeatured();
-  const list = feat.length ? feat : getEnabled();
+  // Plan-study projects live in the "Landscape architecture" section (their
+  // cards link straight to the project pages), so this rail carries only
+  // photographed built projects — hidden until one exists.
+  const built = (arr) => arr.filter((p) => p.kind !== 'plan-study');
+  const feat = built(getFeatured());
+  const list = feat.length ? feat : built(getEnabled());
   if (!list.length) return '';
   return `
   <!-- SELECTED PROJECTS — derived from the project engine (hidden until enabled) -->
@@ -180,32 +204,49 @@ const steps = PROCESS.map(processStep).join('\n');
 const HERO = 'hero/hero-luxury-estate-pool-twilight.webp';
 
 // Homepage structured data — Organization + ProfessionalService + WebSite graph.
+const postalAddress = SITE.address ? {
+  '@type': 'PostalAddress',
+  streetAddress: SITE.address.street,
+  addressLocality: SITE.address.city,
+  addressRegion: SITE.address.region,
+  postalCode: SITE.address.postalCode,
+  addressCountry: SITE.address.country,
+} : undefined;
+
+const service = {
+  '@type': ['ProfessionalService', 'LocalBusiness'],
+  '@id': abs('#service'),
+  name: SITE.name,
+  alternateName: SITE.shortName,
+  description: 'Residential landscape design and construction along the Gulf Coast since 2002.',
+  url: abs(''),
+  image: socialImageAbs(HERO),
+  areaServed: SITE.areaServed,
+  foundingDate: SITE.founded,
+  parentOrganization: { '@id': abs('#organization') },
+  knowsAbout: ['Planting Design', 'Water Features', 'Pools', 'Landscape Lighting', 'Hardscapes', 'Landscape Architecture'],
+};
+if (postalAddress) service.address = postalAddress;
+if (SITE.phone) service.telephone = SITE.phone;
+if (SITE.email) service.email = SITE.email;
+
+const organization = {
+  '@type': 'Organization',
+  '@id': abs('#organization'),
+  name: SITE.name,
+  alternateName: SITE.shortName,
+  url: abs(''),
+  logo: abs('assets/logos/gdsi-logo.webp'),
+  foundingDate: SITE.founded,
+  areaServed: SITE.areaServed,
+};
+if (postalAddress) organization.address = postalAddress;
+
 const homepageJsonLd = jsonld({
   '@context': 'https://schema.org',
   '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': abs('#organization'),
-      name: SITE.name,
-      alternateName: SITE.shortName,
-      url: abs(''),
-      logo: abs('assets/logos/gdsi-logo.webp'),
-      foundingDate: SITE.founded,
-      areaServed: SITE.areaServed,
-    },
-    {
-      '@type': 'ProfessionalService',
-      '@id': abs('#service'),
-      name: SITE.name,
-      alternateName: SITE.shortName,
-      description: 'Residential landscape design and construction along the Gulf Coast since 2002.',
-      url: abs(''),
-      image: socialImageAbs(HERO),
-      areaServed: SITE.areaServed,
-      foundingDate: SITE.founded,
-      parentOrganization: { '@id': abs('#organization') },
-      knowsAbout: ['Planting Design', 'Water Features', 'Pools', 'Landscape Lighting', 'Hardscapes', 'Landscape Architecture'],
-    },
+    organization,
+    service,
     {
       '@type': 'WebSite',
       '@id': abs('#website'),
@@ -286,7 +327,7 @@ ${services}
       <div class="section-head reveal">
         <p class="eyebrow">Landscape architecture</p>
         <h2 class="display" id="architecture-title">Hand-rendered plans.</h2>
-        <p class="section-lede">Named residential projects, drawn as measured design studies. Open any plan to view it full-screen and zoom into the detail.</p>
+        <p class="section-lede">Named residential projects, drawn as measured design studies. Open any project to explore the full plan and zoom into the detail.</p>
       </div>
       <div class="plan-grid">
 ${plans}

@@ -21,7 +21,14 @@ const HOME = '/';          // nav/footer links resolve to the site root
 const CAT_LABEL = { pools: 'Pools', courtyards: 'Courtyards', gardens: 'Gardens', lighting: 'Lighting', entrances: 'Estate Entrances' };
 
 /* ---- Small render helpers ------------------------------------------------- */
-const metaLine = (p) => [p.city, p.completionYear].filter(Boolean).join(' · ');
+function metaLine(p) {
+  const year = p.completionYear
+    ? String(p.completionYear)
+    : (p.designYear ? `Landscape plan · ${p.designYear}` : null);
+  return [p.city, year].filter(Boolean).join(' · ');
+}
+// A plan-study leads with the drawing itself as the hero.
+const isPlanHero = (p, lead) => p.kind === 'plan-study' && lead && p.media.plan && lead.src === p.media.plan.src;
 
 // Pick the most representative image for hero / social, honouring explicit hero.
 function leadImage(p) {
@@ -246,7 +253,8 @@ function structuredData(p, canonical, lead) {
     image: images.slice(0, 8),
   };
   if (p.city) creative.locationCreated = { '@type': 'Place', name: p.city };
-  if (p.completionYear) creative.dateCreated = String(p.completionYear);
+  if (p.completionYear || p.designYear) creative.dateCreated = String(p.completionYear || p.designYear);
+  if (p.architect || p.designer) creative.author = { '@type': 'Person', name: (p.architect || p.designer).replace(/,\s*GDSI$/, '') };
   if (p.intro || p.story) creative.description = p.intro || p.story;
   const crumbs = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -276,15 +284,37 @@ function renderPage(p) {
     ? `<p class="pcats">${p.categories.map((c) => esc(CAT_LABEL[c] || c)).join(' · ')}</p>` : '';
   const intro = p.intro ? `<p class="project-story">${esc(p.intro)}</p>` : (p.story ? `<p class="project-story">${esc(p.story)}</p>` : '');
   const disc = (p.status === 'concept' && p.disclosure) ? `<p class="ba-disclosure ba-disclosure--top">${esc(p.disclosure)}</p>` : '';
+  const planHero = isPlanHero(p, lead);
+  const eyebrow = planHero ? 'Landscape architecture' : (p.featured ? 'Featured project' : '');
 
-  const heroMedia = lead
-    ? `<div class="phero-media">${picture(lead.src, { alt: lead.alt || p.name, eager: true, sizes: '100vw', prefix: PRE })}<div class="hero-scrim"></div></div>`
-    : '';
-
-  const body = `<main id="main">
-    <span id="top"></span>
-
-    <section class="phero" aria-label="${esc(p.name)}">
+  let heroSection;
+  if (planHero) {
+    // Plan-forward hero: the hand-rendered drawing presented on a matte, and
+    // itself the trigger for the zoomable full-screen plan viewer.
+    heroSection = `    <section class="phero phero--plan" aria-label="${esc(p.name)}">
+      <div class="phero-plan-grid">
+        <div class="phero-plan-copy">
+          <nav class="pcrumb" aria-label="Breadcrumb">
+            <a href="${HOME}">Home</a> <span aria-hidden="true">/</span>
+            <a href="${HOME}#architecture">Landscape architecture</a> <span aria-hidden="true">/</span>
+            <span aria-current="page">${esc(p.name)}</span>
+          </nav>
+          <p class="eyebrow eyebrow--light reveal">${esc(eyebrow)}</p>
+          <h1 class="phero-title reveal">${esc(p.name)}</h1>
+          ${metaLine(p) ? `<p class="phero-meta reveal">${esc(metaLine(p))}</p>` : ''}
+          ${p.architect ? `<p class="phero-arch reveal">Landscape architect · ${esc(p.architect.replace(/,\s*GDSI$/, ''))}</p>` : ''}
+        </div>
+        <button class="phero-plan-fig cs-tile reveal" type="button" data-group="${group}" data-full="${master(lead.src, PRE)}" data-alt="${esc(lead.alt || p.name)}" data-caption="Landscape plan — ${esc(p.name)}" aria-label="Open the full landscape plan, zoomable">
+          ${picture(lead.src, { alt: lead.alt || p.name, eager: true, sizes: '(min-width:900px) 62vw, 94vw', prefix: PRE })}
+          <span class="phero-plan-hint" aria-hidden="true">Tap to explore the plan <span>⤢</span></span>
+        </button>
+      </div>
+    </section>`;
+  } else {
+    const heroMedia = lead
+      ? `<div class="phero-media">${picture(lead.src, { alt: lead.alt || p.name, eager: true, sizes: '100vw', prefix: PRE })}<div class="hero-scrim"></div></div>`
+      : '';
+    heroSection = `    <section class="phero" aria-label="${esc(p.name)}">
       ${heroMedia}
       <div class="phero-body">
         <nav class="pcrumb" aria-label="Breadcrumb">
@@ -292,11 +322,17 @@ function renderPage(p) {
           <a href="${HOME}#built">Projects</a> <span aria-hidden="true">/</span>
           <span aria-current="page">${esc(p.name)}</span>
         </nav>
-        ${p.featured ? '<p class="eyebrow eyebrow--light reveal">Featured project</p>' : ''}
+        ${eyebrow ? `<p class="eyebrow eyebrow--light reveal">${esc(eyebrow)}</p>` : ''}
         <h1 class="phero-title reveal">${esc(p.name)}</h1>
         ${metaLine(p) ? `<p class="phero-meta reveal">${esc(metaLine(p))}</p>` : ''}
       </div>
-    </section>
+    </section>`;
+  }
+
+  const body = `<main id="main">
+    <span id="top"></span>
+
+${heroSection}
 
     <section class="section pintro" aria-label="Project introduction">
       <div class="container pintro-grid">
@@ -313,7 +349,7 @@ ${creditsBlock(p)}
     </section>
 ${[
     narrative(p),
-    planBlock(p, group),
+    planHero ? '' : planBlock(p, group),   // plan-study heroes already show the plan
     timelineBlock(p, group),
     galleryBlock('Completed', p.media.completed, p, group, 'Completed project'),
     comparisonBlock(p),
