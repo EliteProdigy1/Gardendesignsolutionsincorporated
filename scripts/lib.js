@@ -19,9 +19,11 @@ const SITE = {
   region: 'Gulf Coast',
   areaServed: ['Fairhope, Alabama', 'Mobile, Alabama', 'Gulf Breeze, Florida', 'Gulf Coast'],
   themeColor: '#24352A',
-  // Business address — verified from the firm's own hand-rendered plan title
-  // blocks (already published on distributed drawings).
-  address: { street: '16612 Greeno Road', city: 'Fairhope', region: 'AL', postalCode: '36532', country: 'US' },
+  // Business address — from the firm's own plan title blocks. Only the parts
+  // that are crisply legible are published: Greeno Road, Fairhope, AL 36532.
+  // The exact street NUMBER on the drawing is too soft to read confidently, so
+  // `street` stays null until the client confirms it (avoids a wrong NAP).
+  address: { street: null, city: 'Fairhope', region: 'AL', postalCode: '36532', country: 'US' },
   // Contact channels render only when present (honest — no invented phone/email).
   // Populate `phone`/`email` here the moment the client verifies them.
   phone: null,

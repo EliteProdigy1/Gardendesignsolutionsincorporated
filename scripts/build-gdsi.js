@@ -204,14 +204,16 @@ const steps = PROCESS.map(processStep).join('\n');
 const HERO = 'hero/hero-luxury-estate-pool-twilight.webp';
 
 // Homepage structured data — Organization + ProfessionalService + WebSite graph.
-const postalAddress = SITE.address ? {
-  '@type': 'PostalAddress',
-  streetAddress: SITE.address.street,
-  addressLocality: SITE.address.city,
-  addressRegion: SITE.address.region,
-  postalCode: SITE.address.postalCode,
-  addressCountry: SITE.address.country,
-} : undefined;
+const postalAddress = SITE.address ? Object.assign(
+  { '@type': 'PostalAddress' },
+  SITE.address.street ? { streetAddress: SITE.address.street } : null,
+  {
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.region,
+    postalCode: SITE.address.postalCode,
+    addressCountry: SITE.address.country,
+  },
+) : undefined;
 
 const service = {
   '@type': ['ProfessionalService', 'LocalBusiness'],
