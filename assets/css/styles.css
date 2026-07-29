@@ -735,6 +735,14 @@ body::before {
 .cs-section { background: var(--ivory); }
 .cs-section:nth-of-type(even) { background: var(--ivory-2); }
 
+/* Project-page content sections carry tighter rhythm than the homepage — the
+   narrative is intentionally concise, so avoid large empty bands. */
+.page-project .pnar-section,
+.page-project .cs-section,
+.page-project .pintro { padding-block: clamp(52px, 7vw, 104px); }
+.page-project .ptestimonial,
+.page-project .prelated { padding-block: clamp(56px, 8vw, 120px); }
+
 /* Testimonial */
 .ptestimonial { background: var(--green); color: var(--ivory); }
 .pquote { margin: 0; max-width: 900px; }
