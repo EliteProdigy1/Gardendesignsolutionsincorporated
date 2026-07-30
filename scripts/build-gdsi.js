@@ -424,7 +424,7 @@ ${steps}
         <dl class="contact-facts">
           <div><dt>Practice</dt><dd>Garden Design Solutions, Inc.</dd></div>
           <div><dt>Since</dt><dd>2002</dd></div>
-          <div><dt>Region</dt><dd>Gulf Coast</dd></div>
+          <div><dt>Location</dt><dd>Fairhope, Alabama · Gulf Coast</dd></div>
           <div><dt>Focus</dt><dd>Residential landscape design &amp; construction</dd></div>
           ${contactChannels()}
         </dl>

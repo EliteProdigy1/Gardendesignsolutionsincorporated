@@ -24,10 +24,10 @@ const SITE = {
   // The exact street NUMBER on the drawing is too soft to read confidently, so
   // `street` stays null until the client confirms it (avoids a wrong NAP).
   address: { street: null, city: 'Fairhope', region: 'AL', postalCode: '36532', country: 'US' },
-  // Contact channels render only when present (honest — no invented phone/email).
-  // Populate `phone`/`email` here the moment the client verifies them.
-  phone: null,
-  email: null,
+  // Contact channels — verified by the client. Render as tel:/mailto: links and
+  // feed the LocalBusiness schema. Email routes to the Elite Prodigy inbox for now.
+  phone: '(251) 223-0812',
+  email: 'eliteprodigyway@gmail.com',
 };
 const abs = (p) => SITE.origin + '/' + String(p).replace(/^\//, '');
 
