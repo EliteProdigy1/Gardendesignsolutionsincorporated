@@ -201,7 +201,6 @@ const plans = PLANS.map(planCard).join('\n');
 const services = SERVICES.map(serviceCard).join('\n');
 const steps = PROCESS.map(processStep).join('\n');
 
-const HERO = 'hero/hero-luxury-estate-pool-twilight.webp';
 
 // Homepage structured data — Organization + ProfessionalService + WebSite graph.
 const postalAddress = SITE.address ? Object.assign(
@@ -222,7 +221,7 @@ const service = {
   alternateName: SITE.shortName,
   description: 'Residential landscape design and construction along the Gulf Coast since 2002.',
   url: abs(''),
-  image: socialImageAbs(HERO),
+  image: socialImageAbs('renderings/connolly-residence-plan-gulf-breeze-fl.webp'),
   areaServed: SITE.areaServed,
   foundingDate: SITE.founded,
   parentOrganization: { '@id': abs('#organization') },
@@ -268,8 +267,9 @@ ${headTags({
   canonical: abs(''),
   ogType: 'website',
   ogTitle: 'Garden Design Solutions, Inc.',
-  ogImage: socialImageAbs(HERO),
-  preload: heroPreload(HERO, '100vw'),
+  // Social card uses a real, verified GDSI plan (not a stock photo).
+  ogImage: socialImageAbs('renderings/connolly-residence-plan-gulf-breeze-fl.webp'),
+  preload: '',
 })}
 ${homepageJsonLd}
 </head>
@@ -281,12 +281,8 @@ ${navHTML('', '')}
 <main id="main">
   <span id="top"></span>
 
-  <!-- HERO -->
-  <section class="hero" aria-label="Introduction">
-    <div class="hero-media">
-      ${picture(HERO, { alt: 'A luxury estate and pool at twilight.', eager: true, sizes: '100vw' })}
-      <div class="hero-scrim"></div>
-    </div>
+  <!-- HERO (photo-free treatment until verified GDSI photography is added) -->
+  <section class="hero hero--plain" aria-label="Introduction">
     <div class="hero-body">
       <p class="eyebrow eyebrow--light reveal">Residential Landscape Design &amp; Construction</p>
       <h1 class="hero-title reveal">Gardens that settle<br><em>into their surroundings.</em></h1>
@@ -380,12 +376,6 @@ ${steps}
     </div>
   </section>
 
-  <!-- DIVIDER -->
-  <section class="divider" aria-hidden="true">
-    <div class="divider-media" data-parallax>
-      ${picture('hero/hero-luxury-landscape-pool-sunset.webp', { alt: '', sizes: '100vw' })}
-    </div>
-  </section>
 
   <!-- STUDIO / ABOUT -->
   <section class="studio section" id="studio" aria-labelledby="studio-title">
