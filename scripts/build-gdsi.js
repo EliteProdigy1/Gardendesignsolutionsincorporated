@@ -345,13 +345,6 @@ ${plans}
     </div>
   </section>
 
-  <!-- DIVIDER -->
-  <section class="divider divider--tall" aria-hidden="true">
-    <div class="divider-media" data-parallax>
-      ${picture('hero/hero-southern-estate-daylight.webp', { alt: '', sizes: '100vw' })}
-    </div>
-  </section>
-
   <!-- BUILT ENVIRONMENTS (completed spaces) -->
   <section class="portfolio section" id="built" aria-labelledby="built-title">
     <div class="container">
